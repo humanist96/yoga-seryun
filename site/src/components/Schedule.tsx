@@ -98,16 +98,16 @@ function DesktopSchedule({ nextKey }: { nextKey: string }) {
             {day}
           </p>
         ))}
-        {TIMES.map((time) => (
+        {TIMES.map((time, timeIndex) => (
           <div key={time} className="contents">
             <p className="text-sm text-muted-foreground tnum pt-4">{time}</p>
-            {DAYS.map((day) => (
-              <ClassCell
+            {DAYS.map((day, dayIndex) => (
+              <motion.div
                 key={`${day}-${time}`}
-                day={day}
-                time={time}
-                isNext={nextKey === `${day}-${time}`}
-              />
+                {...fadeUp(timeIndex * 0.12 + dayIndex * 0.04)}
+              >
+                <ClassCell day={day} time={time} isNext={nextKey === `${day}-${time}`} />
+              </motion.div>
             ))}
           </div>
         ))}

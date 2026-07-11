@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { fadeUp } from '../lib/motion'
 import { CATEGORIES, LEVELS } from '../data/content'
+import AmbientGlow from './AmbientGlow'
 
 function LevelSpectrum() {
   const [selected, setSelected] = useState(1)
@@ -37,8 +38,9 @@ function LevelSpectrum() {
 
 export default function Classes() {
   return (
-    <section id="classes" className="border-t border-border/60 py-28 md:py-40 px-6">
-      <div className="max-w-5xl mx-auto">
+    <section id="classes" className="relative overflow-hidden py-28 md:py-40 px-6">
+      <AmbientGlow className="w-[34rem] h-[34rem] top-24 -left-52 bg-accent-soft/40" />
+      <div className="relative max-w-5xl mx-auto">
         <motion.p
           {...fadeUp(0)}
           className="text-xs tracking-[3px] uppercase text-muted-foreground text-center"
@@ -59,7 +61,8 @@ export default function Classes() {
             <motion.article
               key={category.title}
               {...fadeUp(index * 0.12)}
-              className="rounded-2xl bg-card p-8 flex flex-col"
+              whileHover={{ y: -5 }}
+              className="rounded-2xl bg-card p-8 flex flex-col transition-shadow duration-500 hover:shadow-[0_18px_50px_-16px_rgba(188,92,116,0.25)]"
             >
               <p className="font-latin italic text-accent-deep">{category.eyebrow}</p>
               <h3 className="mt-1 font-serif text-2xl">{category.title}</h3>

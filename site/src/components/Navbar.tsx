@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion'
 import Logo from './Logo'
 import { LINKS } from '../data/content'
 
@@ -11,8 +12,26 @@ const NAV_ITEMS = [
 ] as const
 
 export default function Navbar() {
+  const { scrollY } = useScroll()
+  const [hidden, setHidden] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    const previous = scrollY.getPrevious() ?? 0
+    setHidden(latest > previous && latest > 200)
+    setScrolled(latest > 80)
+  })
+
   return (
-    <header className="fixed top-0 inset-x-0 z-50 bg-gradient-to-b from-background/90 to-transparent">
+    <motion.header
+      animate={{ y: hidden ? '-100%' : '0%' }}
+      transition={{ duration: 0.35, ease: 'easeInOut' }}
+      className={`fixed top-0 inset-x-0 z-50 transition-colors duration-500 ${
+        scrolled
+          ? 'bg-background/80 backdrop-blur-md border-b border-border/60'
+          : 'bg-gradient-to-b from-background/90 to-transparent'
+      }`}
+    >
       <nav className="flex items-center justify-between px-5 md:px-16 lg:px-24 py-4">
         <a href="#top" className="flex items-center gap-2 text-foreground">
           <Logo className="w-7 h-7 text-accent" />
@@ -43,6 +62,6 @@ export default function Navbar() {
           첫 수업 무료 체험
         </motion.a>
       </nav>
-    </header>
+    </motion.header>
   )
 }

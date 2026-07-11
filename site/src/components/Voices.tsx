@@ -1,13 +1,16 @@
 import { motion } from 'framer-motion'
 import { fadeUp } from '../lib/motion'
 import { REVIEWS, REVIEW_KEYWORDS, LINKS } from '../data/content'
+import AmbientGlow from './AmbientGlow'
 
 const MAX_COUNT = Math.max(...REVIEW_KEYWORDS.map((keyword) => keyword.count))
 
 export default function Voices() {
   return (
-    <section className="bg-plum text-plum-foreground py-28 md:py-40 px-6">
-      <div className="max-w-5xl mx-auto">
+    <section className="relative overflow-hidden bg-plum text-plum-foreground py-28 md:py-40 px-6">
+      <AmbientGlow className="w-[40rem] h-[40rem] -top-56 -right-56 bg-accent/10" />
+      <AmbientGlow className="w-[30rem] h-[30rem] -bottom-40 -left-40 bg-accent/[0.07]" />
+      <div className="relative max-w-5xl mx-auto">
         <motion.p {...fadeUp(0)} className="text-xs tracking-[3px] uppercase text-plum-foreground/60">
           voices
         </motion.p>
@@ -44,6 +47,7 @@ export default function Voices() {
               <motion.blockquote
                 key={review.quote}
                 {...fadeUp(0.15 + index * 0.08)}
+                whileHover={{ y: -4 }}
                 className="rounded-2xl bg-plum-soft p-6 flex flex-col justify-between"
               >
                 <p className="text-sm leading-relaxed text-plum-foreground/90">“{review.quote}”</p>

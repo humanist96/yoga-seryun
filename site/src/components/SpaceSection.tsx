@@ -18,7 +18,7 @@ const PHOTOS = [
 
 export default function SpaceSection() {
   return (
-    <section id="space" className="border-t border-border/60 py-28 md:py-40 px-6">
+    <section id="space" className="py-28 md:py-40 px-6">
       <div className="max-w-5xl mx-auto">
         <motion.p
           {...fadeUp(0)}
@@ -42,7 +42,7 @@ export default function SpaceSection() {
                   src={photo.src}
                   alt={photo.alt}
                   loading="lazy"
-                  className="w-full h-full object-cover min-h-72"
+                  className="w-full h-full object-cover min-h-72 transition-transform duration-[2500ms] ease-out hover:scale-[1.045]"
                 />
               </div>
               <figcaption className="mt-3 text-sm text-muted-foreground">{photo.caption}</figcaption>

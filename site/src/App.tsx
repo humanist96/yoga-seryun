@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import LotusDivider from './components/LotusDivider'
 import Philosophy from './components/Philosophy'
 import Classes from './components/Classes'
 import Schedule from './components/Schedule'
@@ -17,10 +18,12 @@ export default function App() {
       <main>
         <Hero />
         <Philosophy />
+        <LotusDivider />
         <Classes />
         <Schedule />
         <Voices />
         <Pricing />
+        <LotusDivider />
         <SpaceSection />
         <Visit />
       </main>
