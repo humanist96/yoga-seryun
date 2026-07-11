@@ -1,0 +1,10 @@
+import type { MotionProps } from 'framer-motion'
+
+export const fadeUp = (delay = 0): MotionProps => ({
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-100px' },
+  transition: { duration: 0.6, delay, ease: 'easeOut' },
+})
+
+export const BREATH_DURATION_S = 10
