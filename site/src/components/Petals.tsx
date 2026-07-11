@@ -35,11 +35,34 @@ function PetalShape({ size }: { size: number }) {
   )
 }
 
+/** 동작 줄이기 설정 기기: 낙하 대신 고정된 꽃잎을 흩뿌려 보여준다 */
+function StaticPetals() {
+  const positions = ['12%', '30%', '58%', '76%', '90%'] as const
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+      {positions.map((left, index) => (
+        <div
+          key={left}
+          className="absolute text-accent opacity-50"
+          style={{
+            left,
+            top: `${12 + index * 16}%`,
+            transform: `rotate(${index * 70 - 30}deg)`,
+          }}
+        >
+          <PetalShape size={PETALS[index]?.size ?? 20} />
+        </div>
+      ))}
+    </div>
+  )
+}
+
 /** 히어로 위로 아주 느리게 떨어지는 연꽃잎 — 시그니처는 이 한 곳에만 */
 export default function Petals() {
   const reduceMotion = useReducedMotion()
 
-  if (reduceMotion) return null
+  if (reduceMotion) return <StaticPetals />
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
