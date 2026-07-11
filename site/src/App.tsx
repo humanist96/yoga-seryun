@@ -2,6 +2,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import LotusDivider from './components/LotusDivider'
 import Philosophy from './components/Philosophy'
+import FilmSection from './components/FilmSection'
 import Classes from './components/Classes'
 import Schedule from './components/Schedule'
 import Voices from './components/Voices'
@@ -19,6 +20,7 @@ export default function App() {
         <Hero />
         <Philosophy />
         <LotusDivider />
+        <FilmSection />
         <Classes />
         <Schedule />
         <Voices />
