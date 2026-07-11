@@ -10,12 +10,14 @@ interface PetalConfig {
 }
 
 const PETALS: readonly PetalConfig[] = [
-  { left: '8%', size: 22, duration: 26, delay: 0, sway: 40, rotate: 210 },
-  { left: '22%', size: 15, duration: 32, delay: 6, sway: -32, rotate: -160 },
-  { left: '46%', size: 19, duration: 28, delay: 12, sway: 48, rotate: 180 },
-  { left: '64%', size: 14, duration: 34, delay: 3, sway: -44, rotate: 240 },
-  { left: '81%', size: 23, duration: 30, delay: 9, sway: 34, rotate: -200 },
-  { left: '92%', size: 17, duration: 36, delay: 16, sway: -26, rotate: 190 },
+  { left: '6%', size: 28, duration: 20, delay: 0, sway: 42, rotate: 210 },
+  { left: '18%', size: 20, duration: 26, delay: 5, sway: -34, rotate: -160 },
+  { left: '34%', size: 24, duration: 22, delay: 9, sway: 50, rotate: 180 },
+  { left: '48%', size: 18, duration: 28, delay: 2, sway: -46, rotate: 240 },
+  { left: '62%', size: 30, duration: 18, delay: 7, sway: 36, rotate: -200 },
+  { left: '74%', size: 21, duration: 24, delay: 11, sway: -28, rotate: 190 },
+  { left: '86%', size: 26, duration: 21, delay: 4, sway: 40, rotate: -230 },
+  { left: '94%', size: 19, duration: 27, delay: 13, sway: -36, rotate: 170 },
 ]
 
 function PetalShape({ size }: { size: number }) {
@@ -24,10 +26,10 @@ function PetalShape({ size }: { size: number }) {
       <path
         d="M10 1C15 8 16 16 10 27C4 16 5 8 10 1Z"
         fill="currentColor"
-        fillOpacity="0.5"
+        fillOpacity="0.68"
         stroke="currentColor"
-        strokeOpacity="0.35"
-        strokeWidth="0.6"
+        strokeOpacity="0.55"
+        strokeWidth="0.7"
       />
     </svg>
   )
@@ -50,7 +52,7 @@ export default function Petals() {
             y: ['0vh', '110vh'],
             x: [0, petal.sway, petal.sway * 0.35, petal.sway * 0.8],
             rotate: [0, petal.rotate],
-            opacity: [0, 0.55, 0.55, 0],
+            opacity: [0, 0.75, 0.75, 0],
           }}
           transition={{
             duration: petal.duration,
