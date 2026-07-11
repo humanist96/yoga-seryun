@@ -89,6 +89,37 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+/* 낙하 연꽃잎 — 순수 CSS 구동 (동작 줄이기 설정과 무관하게 재생) */
+.petal {
+  position: absolute;
+  top: 0;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: petal-fall var(--petal-duration, 24s) linear var(--petal-delay, 0s) infinite;
+}
+
+@keyframes petal-fall {
+  0% {
+    transform: translate3d(0, -8vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.75;
+  }
+  50% {
+    transform: translate3d(var(--petal-sway, 40px), 48vh, 0)
+      rotate(calc(var(--petal-rotate, 200deg) * 0.5));
+  }
+  85% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate3d(calc(var(--petal-sway, 40px) * 0.6), 108vh, 0)
+      rotate(var(--petal-rotate, 200deg));
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
