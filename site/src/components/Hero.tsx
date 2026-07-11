@@ -1,38 +1,21 @@
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
-import { fadeUp, BREATH_DURATION_S } from '../lib/motion'
+import { fadeUp } from '../lib/motion'
 import { HERO_VIDEO_URL, LINKS } from '../data/content'
 import AmbientGlow from './AmbientGlow'
 import Petals from './Petals'
 
-/** 들숨 4초 · 날숨 6초 — 호흡 템포로 숨 쉬는 원, 안쪽에 위상차 링 하나 */
+/**
+ * 들숨 4초 · 날숨 6초 — 호흡 템포로 숨 쉬는 원, 안쪽에 위상차 링 하나.
+ * 순수 CSS keyframes 구동으로 '동작 줄이기' 기기에서도 항상 호흡한다.
+ */
 function BreathingCircle() {
-  const reduceMotion = useReducedMotion()
-
   return (
     <div
       aria-hidden="true"
       className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
     >
-      <motion.div
-        className="w-[28rem] h-[28rem] md:w-[38rem] md:h-[38rem] rounded-full bg-accent/12 blur-sm"
-        animate={reduceMotion ? undefined : { scale: [1, 1.12, 1] }}
-        transition={{
-          duration: BREATH_DURATION_S,
-          times: [0, 0.4, 1],
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
-      <motion.div
-        className="absolute inset-8 md:inset-12 rounded-full border border-accent/20"
-        animate={reduceMotion ? undefined : { scale: [1.06, 1, 1.06], opacity: [0.4, 0.8, 0.4] }}
-        transition={{
-          duration: BREATH_DURATION_S,
-          times: [0, 0.4, 1],
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
+      <div className="breath w-[28rem] h-[28rem] md:w-[38rem] md:h-[38rem] rounded-full bg-accent/12 blur-sm" />
+      <div className="breath-ring absolute inset-8 md:inset-12 rounded-full border border-accent/20" />
     </div>
   )
 }
