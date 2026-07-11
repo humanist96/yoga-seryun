@@ -5,3 +5,4 @@ dist/
 .vercel/
 *.local
 .gstack/
+video/out/
