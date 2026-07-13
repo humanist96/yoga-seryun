@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, motion, useInView } from 'framer-motion'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { fadeUp } from '../lib/motion'
 
@@ -183,18 +183,19 @@ function Lightbox({ index, onClose, onNavigate }: LightboxProps) {
 /**
  * 사진첩 스택 → 펼쳐짐 그리드.
  * 각 카드의 그리드 위치를 측정해 컨테이너 중앙으로 모아둔 뒤(스택),
- * 섹션이 보이면 제자리로 순차 비행한다. '동작 줄이기'에서는 즉시 펼쳐진 상태.
+ * 섹션이 보이면 제자리로 순차 비행한다.
+ * 그리드가 뷰포트보다 긴 모바일에서도 트리거되도록 amount 대신 margin 기준을 쓰고,
+ * 숨 쉬는 원과 같은 원칙으로 '동작 줄이기' 설정과 무관하게 항상 재생한다.
  */
 function SpreadGrid({ onSelect }: { onSelect: (index: number) => void }) {
-  const reduceMotion = useReducedMotion()
   const gridRef = useRef<HTMLDivElement>(null)
   const cardRefs = useRef<Array<HTMLElement | null>>([])
   const [offsets, setOffsets] = useState<Offset[] | null>(null)
   const [spread, setSpread] = useState(false)
-  const inView = useInView(gridRef, { once: true, amount: 0.25 })
+  const inView = useInView(gridRef, { once: true, margin: '0px 0px -25% 0px' })
 
   useLayoutEffect(() => {
-    if (reduceMotion || spread) return
+    if (spread) return
 
     const measure = () => {
       const grid = gridRef.current
@@ -219,25 +220,21 @@ function SpreadGrid({ onSelect }: { onSelect: (index: number) => void }) {
     measure()
     window.addEventListener('resize', measure)
     return () => window.removeEventListener('resize', measure)
-  }, [reduceMotion, spread])
+  }, [spread])
 
   useEffect(() => {
     if (!inView) return
-    if (reduceMotion) {
-      setSpread(true)
-      return
-    }
     const timer = setTimeout(() => setSpread(true), SPREAD_DELAY_MS)
     return () => clearTimeout(timer)
-  }, [inView, reduceMotion])
+  }, [inView])
 
-  const staticLayout = reduceMotion || offsets === null
+  const staticLayout = offsets === null
 
   return (
     <div
       ref={gridRef}
       className={`max-w-3xl mx-auto columns-2 md:columns-3 gap-3 space-y-3 ${
-        !reduceMotion && offsets === null ? 'invisible' : ''
+        offsets === null ? 'invisible' : ''
       }`}
       style={{ pointerEvents: staticLayout || spread ? 'auto' : 'none' }}
     >

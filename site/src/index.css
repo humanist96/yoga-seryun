@@ -127,7 +127,8 @@ body {
   }
 }
 
-/* 갤러리 필름스트립 — 절반(동일 세트 2벌)만큼 이동해 무한 루프, 호버 시 정지 */
+/* 갤러리 필름스트립 — 절반(동일 세트 2벌)만큼 이동해 무한 루프, 호버 시 정지.
+   순수 CSS 구동으로 '동작 줄이기' 설정과 무관하게 모든 기기에서 재생 (숨 쉬는 원과 동일 원칙) */
 .filmstrip {
   animation: filmstrip-scroll 70s linear infinite;
   will-change: transform;
@@ -143,12 +144,6 @@ body {
   }
   to {
     transform: translate3d(-50%, 0, 0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .filmstrip {
-    animation: none;
   }
 }
 
