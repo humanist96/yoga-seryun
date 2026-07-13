@@ -24,8 +24,8 @@ const PHOTOS = [
   },
   {
     src: '/media/gallery/evening-circle.jpg',
-    alt: '저녁 조명 아래 매트가 둥글게 놓인 수련실',
-    caption: '저녁 명상 클래스 — 둥글게 모여 앉는 시간',
+    alt: '싱잉볼을 중심으로 매트가 둥글게 놓인 수련실',
+    caption: '둥글게 모여 앉는 명상 클래스',
     portrait: false,
   },
   {
