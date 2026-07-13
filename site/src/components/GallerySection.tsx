@@ -44,6 +44,11 @@ const PHOTOS = [
     alt: '캔들 조명이 켜진 저녁의 수련실 정면',
     caption: '캔들 조명 아래 사운드 힐링',
   },
+  {
+    src: '/media/arch-locker.jpg',
+    alt: '아치문 너머로 보이는 여성 탈의실과 개인 락커',
+    caption: '아치문 너머, 여성 탈의실과 개인 락커',
+  },
 ] as const
 
 const SWIPE_THRESHOLD_PX = 60
