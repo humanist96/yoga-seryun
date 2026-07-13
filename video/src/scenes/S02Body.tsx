@@ -11,7 +11,7 @@ export default function S02Body() {
 
   return (
     <AbsoluteFill style={{ opacity: sceneFadeIn(frame) }}>
-      <KenBurns src="images/studio-hall.jpg" durationInFrames={sceneDuration('S02Body')} />
+      <KenBurns src="images/hero.jpg" durationInFrames={sceneDuration('S02Body')} />
       <AbsoluteFill
         style={{
           background:
