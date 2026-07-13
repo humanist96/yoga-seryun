@@ -108,19 +108,6 @@ export const REVIEW_KEYWORDS: readonly ReviewKeyword[] = [
   { label: '소수정예예요', count: 21 },
 ]
 
-export interface PriceRow {
-  plan: string
-  three: string
-  six: string
-}
-
-export const PRICING: readonly PriceRow[] = [
-  { plan: '주 2회', three: '40만원', six: '70만원' },
-  { plan: '주 3회', three: '46만원', six: '80만원' },
-]
-
-export const UNLIMITED = { plan: '1년 무제한', price: '140만원', note: '선착순 10명' } as const
-
 export interface Faq {
   q: string
   a: string

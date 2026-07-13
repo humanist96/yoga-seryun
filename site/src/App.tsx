@@ -6,7 +6,7 @@ import FilmSection from './components/FilmSection'
 import Classes from './components/Classes'
 import Schedule from './components/Schedule'
 import Voices from './components/Voices'
-import Pricing from './components/Pricing'
+import FirstClass from './components/FirstClass'
 import GallerySection from './components/GallerySection'
 import Visit from './components/Visit'
 import Footer from './components/Footer'
@@ -24,7 +24,7 @@ export default function App() {
         <Classes />
         <Schedule />
         <Voices />
-        <Pricing />
+        <FirstClass />
         <LotusDivider />
         <GallerySection />
         <Visit />

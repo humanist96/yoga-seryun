@@ -6,7 +6,7 @@ import { LINKS } from '../data/content'
 const NAV_ITEMS = [
   { label: '수업', href: '#classes' },
   { label: '시간표', href: '#schedule' },
-  { label: '가격', href: '#pricing' },
+  { label: '체험', href: '#trial' },
   { label: '공간', href: '#space' },
   { label: '오시는길', href: '#visit' },
 ] as const
