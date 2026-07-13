@@ -127,6 +127,31 @@ body {
   }
 }
 
+/* 갤러리 필름스트립 — 절반(동일 세트 2벌)만큼 이동해 무한 루프, 호버 시 정지 */
+.filmstrip {
+  animation: filmstrip-scroll 70s linear infinite;
+  will-change: transform;
+}
+
+.filmstrip:hover {
+  animation-play-state: paused;
+}
+
+@keyframes filmstrip-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filmstrip {
+    animation: none;
+  }
+}
+
 /* 낙하 연꽃잎 — 순수 CSS 구동 (동작 줄이기 설정과 무관하게 재생) */
 .petal {
   position: absolute;
