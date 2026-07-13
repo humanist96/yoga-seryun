@@ -40,9 +40,9 @@ const PHOTOS = [
     caption: '하루를 마무리하는 이브닝 클래스',
   },
   {
-    src: '/media/gallery/evening-candle.jpg',
-    alt: '캔들 조명이 켜진 저녁의 수련실 정면',
-    caption: '캔들 조명 아래 사운드 힐링',
+    src: '/media/gallery/hall-daylight.jpg',
+    alt: '흰 커튼으로 빛이 가득 드는 낮의 수련실 전경',
+    caption: '커튼 가득 빛이 드는 낮의 수련실',
   },
   {
     src: '/media/arch-locker.jpg',
