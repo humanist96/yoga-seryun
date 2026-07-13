@@ -7,7 +7,7 @@ import Classes from './components/Classes'
 import Schedule from './components/Schedule'
 import Voices from './components/Voices'
 import Pricing from './components/Pricing'
-import SpaceSection from './components/SpaceSection'
+import GallerySection from './components/GallerySection'
 import Visit from './components/Visit'
 import Footer from './components/Footer'
 import FloatingContact from './components/FloatingContact'
@@ -26,7 +26,7 @@ export default function App() {
         <Voices />
         <Pricing />
         <LotusDivider />
-        <SpaceSection />
+        <GallerySection />
         <Visit />
       </main>
       <Footer />

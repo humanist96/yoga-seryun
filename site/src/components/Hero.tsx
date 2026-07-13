@@ -28,7 +28,7 @@ function HeroBackdrop() {
       <video
         className="absolute inset-0 w-full h-full object-cover"
         src={HERO_VIDEO_URL}
-        poster="/media/studio-hall.jpg"
+        poster="/media/hero.jpg"
         autoPlay
         loop
         muted
@@ -39,7 +39,7 @@ function HeroBackdrop() {
 
   return (
     <motion.img
-      src="/media/studio-hall.jpg"
+      src="/media/hero.jpg"
       alt="흰 커튼 사이로 빛이 드는 세련의 수련실"
       className="absolute inset-0 w-full h-full object-cover"
       initial={{ scale: 1 }}
