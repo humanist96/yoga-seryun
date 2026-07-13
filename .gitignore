@@ -6,3 +6,6 @@ dist/
 *.local
 .gstack/
 video/out/
+
+# 렌더 산출 영상은 로컬 보관 (video/out과 동일 정책)
+content/out/**/*.mp4
