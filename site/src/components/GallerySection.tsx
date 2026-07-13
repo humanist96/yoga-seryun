@@ -5,8 +5,8 @@ import { fadeUp } from '../lib/motion'
 
 const PHOTOS = [
   {
-    src: '/media/gallery/hall-symmetry.jpg',
-    alt: '싱잉볼을 중심으로 좌우 대칭을 이룬 밝은 수련실 정면',
+    src: '/media/gallery/hall-pastel.jpg',
+    alt: '흰 커튼과 파스텔 매트가 놓인 밝은 수련실',
     caption: '“사진보다 더 쾌적하고 커요. 차 한 잔 마시며 쉬어갈 수 있는 공간도 있어요.”',
     portrait: false,
   },
@@ -236,7 +236,7 @@ function SpreadGrid({ onSelect }: { onSelect: (index: number) => void }) {
   return (
     <div
       ref={gridRef}
-      className={`columns-2 md:columns-3 gap-4 space-y-4 ${
+      className={`max-w-3xl mx-auto columns-2 md:columns-3 gap-3 space-y-3 ${
         !reduceMotion && offsets === null ? 'invisible' : ''
       }`}
       style={{ pointerEvents: staticLayout || spread ? 'auto' : 'none' }}

@@ -17,7 +17,7 @@ export default function Voices() {
         <motion.h2 {...fadeUp(0.1)} className="mt-4 font-serif text-3xl md:text-5xl leading-snug">
           수련을 다녀간
           <br />
-          85개의 목소리
+          마음들의 목소리
         </motion.h2>
 
         <div className="mt-14 grid lg:grid-cols-[1fr_1.4fr] gap-12">
