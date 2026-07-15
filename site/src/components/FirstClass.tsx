@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { CalendarCheck, Flower2, RotateCcw } from 'lucide-react'
 import { fadeUp } from '../lib/motion'
 import { LINKS } from '../data/content'
+import FirstVisitTimeline from './FirstVisitTimeline'
 
 /** 예약 3스텝 — "예약비 1만원은 오시면 0원"을 그림으로 (기획서 C3) */
 const STEPS = [
@@ -77,7 +78,9 @@ export default function FirstClass() {
           </motion.a>
         </motion.div>
 
-        <motion.p {...fadeUp(0.3)} className="mt-8 text-center text-sm text-muted-foreground">
+        <FirstVisitTimeline />
+
+        <motion.p {...fadeUp(0.3)} className="mt-12 text-center text-sm text-muted-foreground">
           수강권 안내는 상담 시 자세히 도와드려요 ·{' '}
           <a
             href={LINKS.naverTalk}

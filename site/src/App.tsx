@@ -5,6 +5,7 @@ import Philosophy from './components/Philosophy'
 import FilmSection from './components/FilmSection'
 import Classes from './components/Classes'
 import Schedule from './components/Schedule'
+import Teachers from './components/Teachers'
 import Voices from './components/Voices'
 import FirstClass from './components/FirstClass'
 import GallerySection from './components/GallerySection'
@@ -25,6 +26,7 @@ export default function App() {
         <FilmSection />
         <Classes />
         <Schedule />
+        <Teachers />
         <Voices />
         <FirstClass />
         <LotusDivider />

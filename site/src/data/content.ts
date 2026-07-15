@@ -135,3 +135,29 @@ export const FAQS: readonly Faq[] = [
     a: "등록 후에는 '운동가' 앱에서 '요가명상세련 마곡나루점'을 검색해 연결하면 수련 예약과 변경을 앱에서 할 수 있습니다.",
   },
 ]
+
+export interface Announcement {
+  message: string
+  href?: string
+  /** ISO 날짜 — 이 날짜(포함)까지 노출, 지나면 자동 숨김 */
+  until: string
+}
+
+/** 공지 배너 — null이면 미노출. 문구·링크·기간만 바꿔 걸면 된다. */
+export const ANNOUNCEMENT: Announcement | null = {
+  message: '토요일 아침 클래스 오픈 예정 — 사전 문의를 받고 있어요',
+  href: LINKS.naverTalk,
+  until: '2026-08-31',
+}
+
+export interface Teacher {
+  id: string
+  name: string
+  role: string
+  /** 약력 한 줄씩 */
+  lines: readonly string[]
+  photo?: string
+}
+
+/** 강사 소개 — 약력이 채워지면 시간표 아래 섹션이 자동 노출된다. (스캐폴드) */
+export const TEACHERS: readonly Teacher[] = []

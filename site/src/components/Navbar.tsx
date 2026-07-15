@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion'
 import Logo from './Logo'
+import Announcement from './Announcement'
 import { LINKS } from '../data/content'
 import { handleAnchorClick } from '../lib/scroll'
 
@@ -68,6 +69,7 @@ export default function Navbar() {
           첫 수업 무료 체험
         </motion.a>
       </nav>
+      <Announcement />
     </motion.header>
   )
 }

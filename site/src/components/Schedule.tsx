@@ -11,7 +11,7 @@ import {
   type Day,
   type ScheduleEntry,
 } from '../data/schedule'
-import { LEVELS } from '../data/content'
+import { LEVELS, LINKS } from '../data/content'
 import ClassDetailSheet from './ClassDetailSheet'
 
 const dotClassFor = (level: number): string =>
@@ -221,10 +221,39 @@ export default function Schedule() {
         </motion.p>
 
         <motion.div {...fadeUp(0.3)} className="mt-8 space-y-2 text-sm text-muted-foreground">
-          <p>
-            14~17시에는 개인레슨 · 특화프로그램 · 강사반 수업이 진행됩니다. 토요일 아침 수업은 오픈
-            예정이며, 일요일에는 스페셜 명상(야외 · 테마 · 원데이 클래스)이 비정기로 열립니다.
-          </p>
+          <div className="grid sm:grid-cols-2 gap-3 text-left">
+            <div className="rounded-2xl bg-card p-5">
+              <p className="text-xs tracking-[2px] uppercase text-accent-deep">weekday 14–17</p>
+              <p className="mt-2 font-medium text-foreground">개인레슨 · 특화프로그램 · 강사반</p>
+              <p className="mt-1.5 text-xs leading-relaxed">
+                1:1 맞춤 수련과 임산부 요가, 암케어 테라피 등 특화 프로그램이 평일 낮에 진행됩니다.
+              </p>
+              <a
+                href={LINKS.naverTalk}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-3 inline-block text-xs font-medium text-accent-deep underline underline-offset-4"
+              >
+                톡톡으로 상담하기
+              </a>
+            </div>
+            <div className="rounded-2xl bg-card p-5">
+              <p className="text-xs tracking-[2px] uppercase text-accent-deep">sunday special</p>
+              <p className="mt-2 font-medium text-foreground">스페셜 명상</p>
+              <p className="mt-1.5 text-xs leading-relaxed">
+                야외 명상, 테마 명상, 원데이 클래스가 일요일에 비정기로 열립니다. 일정은 공지로
+                안내드려요.
+              </p>
+              <a
+                href={LINKS.naverTalk}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-3 inline-block text-xs font-medium text-accent-deep underline underline-offset-4"
+              >
+                다음 일정 물어보기
+              </a>
+            </div>
+          </div>
           <p>
             수업은 60분간 진행되며 강의실 입장은 20분 전부터 가능합니다. 임산부, 간질(뇌전증),
             심혈관질환, 정신과적 치료 중인 분은 참여 전 담당 강사에게 꼭 알려주세요.
