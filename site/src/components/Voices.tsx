@@ -42,19 +42,37 @@ export default function Voices() {
             <p className="pt-3 text-xs text-plum-foreground/45">네이버 방문자 리뷰 키워드 · 84명 참여</p>
           </motion.div>
 
-          <div className="grid sm:grid-cols-2 gap-4">
-            {REVIEWS.map((review, index) => (
-              <motion.blockquote
-                key={review.quote}
-                {...fadeUp(0.15 + index * 0.08)}
-                whileHover={{ y: -4 }}
-                className="rounded-2xl bg-plum-soft p-6 flex flex-col justify-between"
-              >
-                <p className="text-sm leading-relaxed text-plum-foreground/90">“{review.quote}”</p>
-                <footer className="mt-4 text-xs text-accent/90">{review.tag}</footer>
-              </motion.blockquote>
-            ))}
-          </div>
+          <motion.div
+            {...fadeUp(0.2)}
+            className="relative overflow-hidden self-center"
+            aria-label="회원 리뷰 모음 — 마우스를 올리면 멈춥니다"
+          >
+            <div className="voices-strip flex w-max items-stretch">
+              {[0, 1].map((half) => (
+                <div key={half} className="flex gap-4 pr-4" aria-hidden={half === 1 || undefined}>
+                  {REVIEWS.map((review) => (
+                    <blockquote
+                      key={`${half}-${review.quote}`}
+                      className="w-72 shrink-0 rounded-2xl bg-plum-soft p-6 flex flex-col justify-between"
+                    >
+                      <p className="text-sm leading-relaxed text-plum-foreground/90">
+                        “{review.quote}”
+                      </p>
+                      <footer className="mt-4 text-xs text-accent/90">{review.tag}</footer>
+                    </blockquote>
+                  ))}
+                </div>
+              ))}
+            </div>
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-plum to-transparent"
+            />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-plum to-transparent"
+            />
+          </motion.div>
         </div>
 
         <motion.div {...fadeUp(0.3)} className="mt-16 text-center">

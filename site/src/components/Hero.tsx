@@ -1,9 +1,27 @@
-import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { useMemo, useState } from 'react'
+import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { fadeUp } from '../lib/motion'
 import { HERO_VIDEO_URL, LINKS } from '../data/content'
 import AmbientGlow from './AmbientGlow'
 import Petals from './Petals'
+import BreathGuide from './BreathGuide'
 import { handleAnchorClick } from '../lib/scroll'
+
+type Mood = 'dawn' | 'day' | 'dusk'
+
+/** KST 시각 기준 히어로 무드 — 새벽·아침 / 낮 / 저녁 (기획서 B2) */
+const kstMood = (now: Date): Mood => {
+  const hour = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Seoul' })).getHours()
+  if (hour >= 5 && hour < 11) return 'dawn'
+  if (hour >= 11 && hour < 17) return 'day'
+  return 'dusk'
+}
+
+const SUBTITLE_BY_MOOD: Record<Mood, string> = {
+  dawn: '고요한 아침, 요가와 명상으로 하루를 여는 공간 — 마곡나루 요가명상 세련.',
+  day: '요가와 명상으로 회복하는 공간, 마곡나루 요가명상 세련.',
+  dusk: '오늘 하루를 잘 마치셨나요? 저녁의 호흡으로 회복하는 공간, 마곡나루 요가명상 세련.',
+}
 
 /**
  * 들숨 4초 · 날숨 6초 — 호흡 템포로 숨 쉬는 원, 안쪽에 위상차 링 하나.
@@ -71,13 +89,23 @@ export default function Hero() {
   const { scrollY } = useScroll()
   const contentY = useTransform(scrollY, [0, 600], [0, 110])
   const contentOpacity = useTransform(scrollY, [0, 480], [1, 0.1])
+  const mood = useMemo(() => kstMood(new Date()), [])
+  const [breathOpen, setBreathOpen] = useState(false)
 
   return (
     <section id="top" className="relative min-h-svh flex items-center justify-center overflow-hidden">
       <HeroBackdrop />
       <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background/80" />
-      <AmbientGlow className="w-[42rem] h-[42rem] -top-48 -right-40 bg-accent-soft/60" />
-      <AmbientGlow className="w-[36rem] h-[36rem] -bottom-40 -left-40 bg-sage/25" />
+      <AmbientGlow
+        className={`w-[42rem] h-[42rem] -top-48 -right-40 ${
+          mood === 'dusk' ? 'bg-accent/30' : 'bg-accent-soft/60'
+        }`}
+      />
+      <AmbientGlow
+        className={`w-[36rem] h-[36rem] -bottom-40 -left-40 ${
+          mood === 'dusk' ? 'bg-plum/25' : 'bg-sage/25'
+        }`}
+      />
       <BreathingCircle />
       <Petals />
 
@@ -105,7 +133,7 @@ export default function Hero() {
           {...fadeUp(0.25)}
           className="mt-6 text-base md:text-lg text-hero-subtitle max-w-xl"
         >
-          요가와 명상으로 회복하는 공간, 마곡나루 요가명상 세련.
+          {SUBTITLE_BY_MOOD[mood]}
           <br className="hidden md:block" /> 동작만을 좇는 요가가 아니라, 명상의 일부로서의 요가를
           안내합니다.
         </motion.p>
@@ -135,9 +163,23 @@ export default function Hero() {
         <motion.p {...fadeUp(0.55)} className="mt-10 text-sm text-muted-foreground">
           네이버 리뷰 85건 · 소수정예 4~5인 · 마곡나루역 1번 출구 도보 4분
         </motion.p>
+
+        <motion.button
+          {...fadeUp(0.7)}
+          type="button"
+          onClick={() => setBreathOpen(true)}
+          className="mt-6 group flex items-center gap-2 rounded-full border border-accent/30 px-4 py-2 text-xs text-accent-deep hover:bg-accent-soft/40 transition-colors"
+        >
+          <span aria-hidden="true" className="breath w-2 h-2 rounded-full bg-accent/70" />
+          원을 눌러, 한 호흡
+        </motion.button>
       </motion.div>
 
       <ScrollHint />
+
+      <AnimatePresence>
+        {breathOpen && <BreathGuide onClose={() => setBreathOpen(false)} />}
+      </AnimatePresence>
     </section>
   )
 }

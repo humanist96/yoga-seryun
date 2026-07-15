@@ -49,7 +49,7 @@ export default function Navbar() {
               <a
                 href={item.href}
                 onClick={(event) => handleAnchorClick(event, item.href)}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="nav-link text-muted-foreground hover:text-foreground transition-colors"
               >
                 {item.label}
               </a>

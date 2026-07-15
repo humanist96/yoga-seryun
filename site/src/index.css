@@ -147,6 +147,36 @@ body {
   }
 }
 
+/* Voices 리뷰 마퀴 — 필름스트립과 동일 문법, 느린 흐름 + 호버 정지 */
+.voices-strip {
+  animation: filmstrip-scroll 55s linear infinite;
+  will-change: transform;
+}
+
+.voices-strip:hover {
+  animation-play-state: paused;
+}
+
+/* 내비 링크 언더라인 growth */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -4px;
+  height: 1px;
+  background: var(--color-accent);
+  transition: right 0.3s ease;
+}
+
+.nav-link:hover::after {
+  right: 0;
+}
+
 /* 낙하 연꽃잎 — 순수 CSS 구동 (동작 줄이기 설정과 무관하게 재생) */
 .petal {
   position: absolute;

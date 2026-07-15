@@ -12,6 +12,7 @@ import Visit from './components/Visit'
 import Footer from './components/Footer'
 import FloatingContact from './components/FloatingContact'
 import MobileDock from './components/MobileDock'
+import LotusProgress from './components/LotusProgress'
 
 export default function App() {
   return (
@@ -33,6 +34,7 @@ export default function App() {
       <Footer />
       <FloatingContact />
       <MobileDock />
+      <LotusProgress />
     </div>
   )
 }
