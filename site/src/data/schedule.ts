@@ -53,8 +53,16 @@ const toMinutes = (time: Time): number => {
   return hour * 60 + minute
 }
 
-/** 지금(KST) 기준으로 가장 가까운 다음 수업을 찾는다. */
-export const findNextClass = (now: Date): ScheduleEntry | undefined => {
+export interface NextClassInfo {
+  entry: ScheduleEntry
+  /** 0이면 오늘, 1이면 내일… */
+  dayOffset: number
+  /** 시작까지 남은 분 — dayOffset이 0일 때만 유효 */
+  minutesUntil: number
+}
+
+/** 지금(KST) 기준으로 가장 가까운 다음 수업과 남은 시간을 찾는다. */
+export const findNextClassInfo = (now: Date): NextClassInfo | undefined => {
   const kst = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Seoul' }))
   const nowMinutes = kst.getHours() * 60 + kst.getMinutes()
 
@@ -67,10 +75,21 @@ export const findNextClass = (now: Date): ScheduleEntry | undefined => {
       (entry) => entry.day === day && (offset > 0 || toMinutes(entry.time) > nowMinutes),
     ).sort((a, b) => toMinutes(a.time) - toMinutes(b.time))
 
-    if (candidates.length > 0) return candidates[0]
+    if (candidates.length > 0) {
+      const entry = candidates[0]
+      return {
+        entry,
+        dayOffset: offset,
+        minutesUntil: offset === 0 ? toMinutes(entry.time) - nowMinutes : 0,
+      }
+    }
   }
   return undefined
 }
+
+/** 지금(KST) 기준으로 가장 가까운 다음 수업을 찾는다. */
+export const findNextClass = (now: Date): ScheduleEntry | undefined =>
+  findNextClassInfo(now)?.entry
 
 export const todayKstDay = (now: Date): Day => {
   const kst = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Seoul' }))

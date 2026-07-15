@@ -1,23 +1,38 @@
 import { useMemo, useState } from 'react'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
+import { ChevronRight, Sparkles } from 'lucide-react'
 import { fadeUp } from '../lib/motion'
-import { DAYS, TIMES, SCHEDULE, findNextClass, todayKstDay, type Day } from '../data/schedule'
+import {
+  DAYS,
+  TIMES,
+  SCHEDULE,
+  findNextClassInfo,
+  todayKstDay,
+  type Day,
+  type ScheduleEntry,
+} from '../data/schedule'
 import { LEVELS } from '../data/content'
+import ClassDetailSheet from './ClassDetailSheet'
 
 const dotClassFor = (level: number): string =>
   LEVELS.find((item) => item.level === level)?.dotClass ?? 'bg-muted'
 
-function useNextClass() {
-  return useMemo(() => findNextClass(new Date()), [])
+function useNextClassInfo() {
+  return useMemo(() => findNextClassInfo(new Date()), [])
 }
+
+/** "40분 후" · "약 3시간 후" — 조급함을 주지 않는 굵은 단위 표기 */
+const remainLabel = (minutes: number): string =>
+  minutes < 60 ? `${minutes}분 후` : `약 ${Math.round(minutes / 60)}시간 후`
 
 interface CellProps {
   day: Day
   time: (typeof TIMES)[number]
   isNext: boolean
+  onSelect: (entry: ScheduleEntry) => void
 }
 
-function ClassCell({ day, time, isNext }: CellProps) {
+function ClassCell({ day, time, isNext, onSelect }: CellProps) {
   const entry = SCHEDULE.find((item) => item.day === day && item.time === time)
 
   if (!entry) {
@@ -29,8 +44,11 @@ function ClassCell({ day, time, isNext }: CellProps) {
   }
 
   return (
-    <div
-      className={`rounded-xl bg-card p-3 min-h-20 flex flex-col justify-between ${
+    <button
+      type="button"
+      onClick={() => onSelect(entry)}
+      aria-label={`${day}요일 ${time} ${entry.name} 수업 안내 보기`}
+      className={`group relative w-full text-left rounded-xl bg-card p-3 min-h-20 flex flex-col justify-between transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_-14px_rgba(188,92,116,0.4)] ${
         isNext ? 'ring-2 ring-accent' : ''
       }`}
     >
@@ -43,11 +61,59 @@ function ClassCell({ day, time, isNext }: CellProps) {
         {entry.teacher && <span>{entry.teacher} 선생님</span>}
       </div>
       {isNext && <p className="mt-1 text-[11px] font-medium text-accent-deep">다가오는 수업</p>}
-    </div>
+      <ChevronRight
+        aria-hidden="true"
+        className="absolute right-2 bottom-2 w-3.5 h-3.5 text-accent/0 transition-colors duration-300 group-hover:text-accent/70"
+      />
+    </button>
   )
 }
 
-function MobileSchedule({ nextKey }: { nextKey: string }) {
+/** 다가오는 수업 라이브 배너 — findNextClassInfo 결과를 문장으로 (기획서 C2) */
+function NextClassBanner({ onSelect }: { onSelect: (entry: ScheduleEntry) => void }) {
+  const info = useNextClassInfo()
+  if (!info) return null
+
+  const { entry, dayOffset, minutesUntil } = info
+  const when =
+    dayOffset === 0
+      ? `오늘 ${entry.time}`
+      : dayOffset === 1
+        ? `내일 ${entry.time}`
+        : `${entry.day}요일 ${entry.time}`
+
+  return (
+    <motion.div {...fadeUp(0.15)} className="mb-10 flex justify-center px-1">
+      <button
+        type="button"
+        onClick={() => onSelect(entry)}
+        className="group liquid-glass rounded-full pl-4 pr-3 py-2.5 flex items-center gap-2.5 text-sm hover:shadow-[0_10px_30px_-12px_rgba(188,92,116,0.35)] transition-shadow"
+      >
+        <Sparkles className="w-4 h-4 text-accent shrink-0" aria-hidden="true" />
+        <span className="text-foreground text-left">
+          <span className="tnum font-medium">{when}</span> {entry.name}
+          {entry.teacher && <span className="text-muted-foreground"> · {entry.teacher} 선생님</span>}
+          {dayOffset === 0 && (
+            <span className="text-accent-deep font-medium"> · {remainLabel(minutesUntil)} 시작</span>
+          )}
+        </span>
+        <span className="hidden sm:inline text-muted-foreground shrink-0">· 체험 가능</span>
+        <ChevronRight
+          className="w-4 h-4 text-muted-foreground group-hover:text-accent transition-colors shrink-0"
+          aria-hidden="true"
+        />
+      </button>
+    </motion.div>
+  )
+}
+
+function MobileSchedule({
+  nextKey,
+  onSelect,
+}: {
+  nextKey: string
+  onSelect: (entry: ScheduleEntry) => void
+}) {
   const [selectedDay, setSelectedDay] = useState<Day>(() => todayKstDay(new Date()))
 
   return (
@@ -79,6 +145,7 @@ function MobileSchedule({ nextKey }: { nextKey: string }) {
                 day={selectedDay}
                 time={time}
                 isNext={nextKey === `${selectedDay}-${time}`}
+                onSelect={onSelect}
               />
             </div>
           </div>
@@ -88,7 +155,13 @@ function MobileSchedule({ nextKey }: { nextKey: string }) {
   )
 }
 
-function DesktopSchedule({ nextKey }: { nextKey: string }) {
+function DesktopSchedule({
+  nextKey,
+  onSelect,
+}: {
+  nextKey: string
+  onSelect: (entry: ScheduleEntry) => void
+}) {
   return (
     <div className="hidden md:block overflow-x-auto">
       <div className="grid grid-cols-[4rem_repeat(6,1fr)] gap-2 min-w-[720px]">
@@ -102,11 +175,13 @@ function DesktopSchedule({ nextKey }: { nextKey: string }) {
           <div key={time} className="contents">
             <p className="text-sm text-muted-foreground tnum pt-4">{time}</p>
             {DAYS.map((day, dayIndex) => (
-              <motion.div
-                key={`${day}-${time}`}
-                {...fadeUp(timeIndex * 0.12 + dayIndex * 0.04)}
-              >
-                <ClassCell day={day} time={time} isNext={nextKey === `${day}-${time}`} />
+              <motion.div key={`${day}-${time}`} {...fadeUp(timeIndex * 0.12 + dayIndex * 0.04)}>
+                <ClassCell
+                  day={day}
+                  time={time}
+                  isNext={nextKey === `${day}-${time}`}
+                  onSelect={onSelect}
+                />
               </motion.div>
             ))}
           </div>
@@ -117,8 +192,9 @@ function DesktopSchedule({ nextKey }: { nextKey: string }) {
 }
 
 export default function Schedule() {
-  const nextClass = useNextClass()
-  const nextKey = nextClass ? `${nextClass.day}-${nextClass.time}` : ''
+  const nextInfo = useNextClassInfo()
+  const nextKey = nextInfo ? `${nextInfo.entry.day}-${nextInfo.entry.time}` : ''
+  const [activeEntry, setActiveEntry] = useState<ScheduleEntry | null>(null)
 
   return (
     <section id="schedule" className="border-t border-border/60 py-28 md:py-40 px-6">
@@ -129,17 +205,20 @@ export default function Schedule() {
         >
           class schedule
         </motion.p>
-        <motion.h2
-          {...fadeUp(0.1)}
-          className="mt-4 mb-12 font-serif text-3xl md:text-5xl text-center"
-        >
+        <motion.h2 {...fadeUp(0.1)} className="mt-4 mb-8 font-serif text-3xl md:text-5xl text-center">
           이번 주의 수련
         </motion.h2>
 
+        <NextClassBanner onSelect={setActiveEntry} />
+
         <motion.div {...fadeUp(0.2)}>
-          <MobileSchedule nextKey={nextKey} />
-          <DesktopSchedule nextKey={nextKey} />
+          <MobileSchedule nextKey={nextKey} onSelect={setActiveEntry} />
+          <DesktopSchedule nextKey={nextKey} onSelect={setActiveEntry} />
         </motion.div>
+
+        <motion.p {...fadeUp(0.25)} className="mt-5 text-center text-xs text-muted-foreground">
+          수업을 누르면 안내와 함께 바로 체험 예약으로 이어집니다.
+        </motion.p>
 
         <motion.div {...fadeUp(0.3)} className="mt-8 space-y-2 text-sm text-muted-foreground">
           <p>
@@ -152,6 +231,10 @@ export default function Schedule() {
           </p>
         </motion.div>
       </div>
+
+      <AnimatePresence>
+        {activeEntry && <ClassDetailSheet entry={activeEntry} onClose={() => setActiveEntry(null)} />}
+      </AnimatePresence>
     </section>
   )
 }

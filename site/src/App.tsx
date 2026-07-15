@@ -11,6 +11,7 @@ import GallerySection from './components/GallerySection'
 import Visit from './components/Visit'
 import Footer from './components/Footer'
 import FloatingContact from './components/FloatingContact'
+import MobileDock from './components/MobileDock'
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
       </main>
       <Footer />
       <FloatingContact />
+      <MobileDock />
     </div>
   )
 }

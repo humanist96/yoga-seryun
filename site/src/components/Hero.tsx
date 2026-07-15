@@ -3,6 +3,7 @@ import { fadeUp } from '../lib/motion'
 import { HERO_VIDEO_URL, LINKS } from '../data/content'
 import AmbientGlow from './AmbientGlow'
 import Petals from './Petals'
+import { handleAnchorClick } from '../lib/scroll'
 
 /**
  * 들숨 4초 · 날숨 6초 — 호흡 템포로 숨 쉬는 원, 안쪽에 위상차 링 하나.
@@ -55,6 +56,7 @@ function ScrollHint() {
   return (
     <motion.a
       href="#classes"
+      onClick={(event) => handleAnchorClick(event, '#classes')}
       className="absolute bottom-7 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors"
       animate={reduceMotion ? undefined : { y: [0, 7, 0], opacity: [0.55, 1, 0.55] }}
       transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
@@ -121,6 +123,7 @@ export default function Hero() {
           </motion.a>
           <motion.a
             href="#schedule"
+            onClick={(event) => handleAnchorClick(event, '#schedule')}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             className="liquid-glass rounded-full px-8 py-3.5 text-sm font-medium text-foreground"

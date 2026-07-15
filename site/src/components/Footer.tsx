@@ -9,7 +9,7 @@ const CHANNELS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-plum text-plum-foreground/70 py-14 px-6">
+    <footer className="bg-plum text-plum-foreground/70 pt-14 pb-40 md:py-14 px-6">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-2.5">
           <Logo className="w-6 h-6 text-accent" />

@@ -4,7 +4,7 @@ import { LINKS } from '../data/content'
 
 export default function FloatingContact() {
   return (
-    <div className="fixed bottom-5 right-5 z-50 flex flex-col gap-2.5">
+    <div className="fixed bottom-40 md:bottom-5 right-4 md:right-5 z-40 flex flex-col gap-2.5">
       <motion.a
         href={LINKS.tel}
         aria-label="전화로 문의하기"

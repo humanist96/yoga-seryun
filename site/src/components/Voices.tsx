@@ -68,8 +68,8 @@ export default function Voices() {
           >
             나의 첫 수업 예약하기
           </motion.a>
-          <p className="mt-3 text-xs text-plum-foreground/50">
-            예약비 1만원, 수업에 참여하시면 전액 환불됩니다.
+          <p className="mt-3 text-xs text-plum-foreground/50 tnum">
+            예약 1만원 → 수업 참여 → 전액 환불 · 오시면 0원입니다.
           </p>
         </motion.div>
       </div>

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion'
 import Logo from './Logo'
 import { LINKS } from '../data/content'
+import { handleAnchorClick } from '../lib/scroll'
 
 const NAV_ITEMS = [
   { label: '수업', href: '#classes' },
@@ -33,7 +34,11 @@ export default function Navbar() {
       }`}
     >
       <nav className="flex items-center justify-between px-5 md:px-16 lg:px-24 py-4">
-        <a href="#top" className="flex items-center gap-2 text-foreground">
+        <a
+          href="#top"
+          onClick={(event) => handleAnchorClick(event, '#top')}
+          className="flex items-center gap-2 text-foreground"
+        >
           <Logo className="w-7 h-7 text-accent" />
           <span className="font-serif text-lg tracking-tight">요가명상,세련</span>
         </a>
@@ -43,6 +48,7 @@ export default function Navbar() {
             <li key={item.href}>
               <a
                 href={item.href}
+                onClick={(event) => handleAnchorClick(event, item.href)}
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 {item.label}
