@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { X } from 'lucide-react'
 import { LINKS } from '../data/content'
+import { useFocusTrap } from '../lib/focusTrap'
 
 const CYCLE_S = 10
 const INHALE_S = 4
@@ -26,8 +27,10 @@ const stateAt = (elapsedS: number): BreathState => {
  * 원의 호흡은 기존 .breath CSS keyframes와 동일 템포라 텍스트와 자연 동기화된다.
  */
 export default function BreathGuide({ onClose }: { onClose: () => void }) {
+  const containerRef = useRef<HTMLDivElement>(null)
   const [state, setState] = useState<BreathState>({ phase: 'inhale', count: 1 })
   const startRef = useRef<number>(Date.now())
+  useFocusTrap(containerRef)
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -59,6 +62,7 @@ export default function BreathGuide({ onClose }: { onClose: () => void }) {
 
   return (
     <motion.div
+      ref={containerRef}
       role="dialog"
       aria-modal="true"
       aria-label="호흡 가이드"

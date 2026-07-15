@@ -2,6 +2,8 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react
 import { AnimatePresence, motion, useInView } from 'framer-motion'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { fadeUp } from '../lib/motion'
+import { webpSrcSet } from '../lib/images'
+import { useFocusTrap } from '../lib/focusTrap'
 
 const PHOTOS = [
   {
@@ -73,8 +75,10 @@ type LightboxProps = {
 }
 
 function Lightbox({ index, onClose, onNavigate }: LightboxProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const photo = PHOTOS[index]
+  useFocusTrap(containerRef)
 
   const goPrev = useCallback(
     () => onNavigate((index - 1 + PHOTOS.length) % PHOTOS.length),
@@ -106,6 +110,7 @@ function Lightbox({ index, onClose, onNavigate }: LightboxProps) {
 
   return (
     <motion.div
+      ref={containerRef}
       role="dialog"
       aria-modal="true"
       aria-label={photo.alt}
@@ -265,14 +270,21 @@ function SpreadGrid({ onSelect }: { onSelect: (index: number) => void }) {
               className="group block w-full overflow-hidden rounded-2xl shadow-[0_10px_36px_rgba(120,80,60,0.16)]"
               onClick={() => onSelect(index)}
             >
-              <img
-                src={photo.src}
-                alt={photo.alt}
-                loading="lazy"
-                className={`w-full object-cover transition-transform duration-[2500ms] ease-out group-hover:scale-[1.045] ${
-                  photo.portrait ? 'aspect-[3/4]' : 'aspect-[4/3]'
-                }`}
-              />
+              <picture>
+                <source
+                  type="image/webp"
+                  srcSet={webpSrcSet(photo.src)}
+                  sizes="(min-width: 768px) 244px, 45vw"
+                />
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  loading="lazy"
+                  className={`w-full object-cover transition-transform duration-[2500ms] ease-out group-hover:scale-[1.045] ${
+                    photo.portrait ? 'aspect-[3/4]' : 'aspect-[4/3]'
+                  }`}
+                />
+              </picture>
             </button>
           </motion.figure>
         )
@@ -297,12 +309,15 @@ function Filmstrip({ onSelect }: { onSelect: (index: number) => void }) {
                 className="shrink-0 overflow-hidden rounded-xl opacity-85 hover:opacity-100 transition-opacity"
                 onClick={() => onSelect(index)}
               >
-                <img
-                  src={photo.src}
-                  alt=""
-                  loading="lazy"
-                  className="h-20 md:h-24 w-auto object-cover"
-                />
+                <picture>
+                  <source type="image/webp" srcSet={webpSrcSet(photo.src)} sizes="160px" />
+                  <img
+                    src={photo.src}
+                    alt=""
+                    loading="lazy"
+                    className="h-20 md:h-24 w-auto object-cover"
+                  />
+                </picture>
               </button>
             ))}
           </div>

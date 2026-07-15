@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { CalendarCheck, MessageCircle, X } from 'lucide-react'
 import type { ScheduleEntry } from '../data/schedule'
 import { LEVELS, LINKS } from '../data/content'
+import { useFocusTrap } from '../lib/focusTrap'
 
 interface ClassDetailSheetProps {
   entry: ScheduleEntry
@@ -15,8 +16,10 @@ interface ClassDetailSheetProps {
  * 네이버 예약은 수업별 딥링크가 없어, 요청사항 메모 안내를 함께 보여준다.
  */
 export default function ClassDetailSheet({ entry, onClose }: ClassDetailSheetProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const level = LEVELS.find((item) => item.level === entry.level)
+  useFocusTrap(containerRef)
 
   useEffect(() => {
     closeButtonRef.current?.focus()
@@ -40,6 +43,7 @@ export default function ClassDetailSheet({ entry, onClose }: ClassDetailSheetPro
 
   return (
     <motion.div
+      ref={containerRef}
       role="dialog"
       aria-modal="true"
       aria-label={`${entry.day}요일 ${entry.time} ${entry.name} 수업 안내`}

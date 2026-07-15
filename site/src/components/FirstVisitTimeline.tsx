@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { fadeUp } from '../lib/motion'
+import { webpSrcSet } from '../lib/images'
 
 const STEPS = [
   {
@@ -40,12 +41,19 @@ export default function FirstVisitTimeline() {
         {STEPS.map((step, index) => (
           <motion.li key={step.title} {...fadeUp(0.1 + index * 0.08)} className="flex sm:block gap-4">
             <div className="w-24 sm:w-full shrink-0 overflow-hidden rounded-xl">
-              <img
-                src={step.photo}
-                alt=""
-                loading="lazy"
-                className="w-full aspect-square sm:aspect-[4/3] object-cover"
-              />
+              <picture>
+                <source
+                  type="image/webp"
+                  srcSet={webpSrcSet(step.photo)}
+                  sizes="(min-width: 640px) 180px, 96px"
+                />
+                <img
+                  src={step.photo}
+                  alt=""
+                  loading="lazy"
+                  className="w-full aspect-square sm:aspect-[4/3] object-cover"
+                />
+              </picture>
             </div>
             <div className="sm:mt-3">
               <p className="text-[11px] tracking-wide uppercase text-accent-deep tnum">

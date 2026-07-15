@@ -57,14 +57,21 @@ function HeroBackdrop() {
   }
 
   return (
-    <motion.img
-      src="/media/hero.jpg"
-      alt="흰 커튼 사이로 빛이 드는 세련의 수련실"
-      className="absolute inset-0 w-full h-full object-cover"
-      initial={{ scale: 1 }}
-      animate={reduceMotion ? undefined : { scale: 1.06 }}
-      transition={{ duration: 32, ease: 'linear', repeat: Infinity, repeatType: 'mirror' }}
-    />
+    <picture className="absolute inset-0">
+      <source
+        type="image/webp"
+        srcSet="/media/opt/hero-960.webp 960w, /media/opt/hero-1600.webp 1600w, /media/opt/hero-2400.webp 2400w"
+        sizes="100vw"
+      />
+      <motion.img
+        src="/media/hero.jpg"
+        alt="흰 커튼 사이로 빛이 드는 세련의 수련실"
+        className="absolute inset-0 w-full h-full object-cover"
+        initial={{ scale: 1 }}
+        animate={reduceMotion ? undefined : { scale: 1.06 }}
+        transition={{ duration: 32, ease: 'linear', repeat: Infinity, repeatType: 'mirror' }}
+      />
+    </picture>
   )
 }
 
