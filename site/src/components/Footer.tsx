@@ -12,7 +12,7 @@ export default function Footer() {
     <footer className="bg-plum text-plum-foreground/70 pt-14 pb-40 md:py-14 px-6">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-2.5">
-          <Logo className="w-6 h-6 text-accent" />
+          <Logo className="w-14 h-14 text-plum-foreground" />
           <div>
             <p className="text-plum-foreground text-sm font-medium">요가명상,세련 마곡나루점</p>
             <p className="text-xs">SR : A Space To Restore</p>

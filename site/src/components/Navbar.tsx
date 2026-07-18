@@ -40,7 +40,7 @@ export default function Navbar() {
           onClick={(event) => handleAnchorClick(event, '#top')}
           className="flex items-center gap-2 text-foreground"
         >
-          <Logo className="w-7 h-7 text-accent" />
+          <Logo className="w-10 h-10 text-foreground" ring={false} />
           <span className="font-serif text-lg tracking-tight">요가명상,세련</span>
         </a>
 
