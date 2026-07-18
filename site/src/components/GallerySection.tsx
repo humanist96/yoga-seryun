@@ -293,48 +293,6 @@ function SpreadGrid({ onSelect }: { onSelect: (index: number) => void }) {
   )
 }
 
-/** 무한 루프 필름스트립 — 호흡처럼 느리게 흐르고, 호버 시 멈추고, 클릭하면 라이트박스. */
-function Filmstrip({ onSelect }: { onSelect: (index: number) => void }) {
-  return (
-    <div className="relative mt-14 overflow-hidden" aria-label="수련실 사진 필름스트립">
-      <div className="filmstrip flex w-max">
-        {[0, 1].map((half) => (
-          <div key={half} className="flex gap-3 pr-3" aria-hidden={half === 1 || undefined}>
-            {PHOTOS.map((photo, index) => (
-              <button
-                key={`${half}-${photo.src}`}
-                type="button"
-                tabIndex={half === 1 ? -1 : 0}
-                aria-label={`${photo.alt} 크게 보기`}
-                className="shrink-0 overflow-hidden rounded-xl opacity-85 hover:opacity-100 transition-opacity"
-                onClick={() => onSelect(index)}
-              >
-                <picture>
-                  <source type="image/webp" srcSet={webpSrcSet(photo.src)} sizes="160px" />
-                  <img
-                    src={photo.src}
-                    alt=""
-                    loading="lazy"
-                    className="h-20 md:h-24 w-auto object-cover"
-                  />
-                </picture>
-              </button>
-            ))}
-          </div>
-        ))}
-      </div>
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 left-0 w-16 md:w-28 bg-gradient-to-r from-background to-transparent"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 right-0 w-16 md:w-28 bg-gradient-to-l from-background to-transparent"
-      />
-    </div>
-  )
-}
-
 export default function GallerySection() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
@@ -357,8 +315,6 @@ export default function GallerySection() {
           사진을 누르면 크게 볼 수 있어요 · 매트와 소도구는 모두 준비되어 있습니다 · 남녀 화장실 구분 · 개인 락커
         </motion.p>
       </div>
-
-      <Filmstrip onSelect={setActiveIndex} />
 
       <AnimatePresence>
         {activeIndex !== null && (
