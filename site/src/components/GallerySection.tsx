@@ -312,7 +312,7 @@ export default function GallerySection() {
         <SpreadGrid onSelect={setActiveIndex} />
 
         <motion.p {...fadeUp(0.25)} className="mt-10 text-center text-sm text-muted-foreground">
-          사진을 누르면 크게 볼 수 있어요 · 매트와 소도구는 모두 준비되어 있습니다 · 남녀 화장실 구분 · 개인 락커
+          사진을 누르면 크게 볼 수 있어요 · 매트와 소도구는 모두 준비되어 있습니다 · 개인 락커
         </motion.p>
       </div>
 
