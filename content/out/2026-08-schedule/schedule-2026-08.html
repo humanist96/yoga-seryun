@@ -210,6 +210,13 @@
   }
   .f-item + .f-item { border-left: 1.5px solid #ddd; }
   .f-item svg { flex: none; }
+
+  /* ── A4 인쇄 (세로) ───────────────────── */
+  @page { size: A4 portrait; margin: 0; }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .poster { margin: 0 auto; }
+  }
 </style>
 </head>
 <body>
