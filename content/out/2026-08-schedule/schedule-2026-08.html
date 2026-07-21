@@ -14,13 +14,14 @@
     --green-line: #4a7050;   /* 시소선생님 테두리 */
     --orange-line: #e2703a;  /* 나영선생님 테두리 */
     --ink: #2b2b2b;
-    --cell-yellow: #fdf3d7;  /* 인요가 */
+    --cell-yellow: #fcedad;  /* 인요가 */
     --cell-cream: #fdf8ea;   /* 아로마 호흡명상 */
     --cell-blue: #e3eef7;    /* 하타 계열 */
     --cell-paleblue: #f1f7fa;/* 싱잉볼 이완명상 */
     --cell-green: #e9f1de;   /* 테라피 계열 */
-    --cell-lavender: #ecebf7;/* 아쉬탕가 */
-    --cell-white: #ffffff;   /* 빈야사 */
+    --cell-lavender: #ecebf7;/* 아쉬탕가 · 빈야사 */
+    --cell-orange: #fce4d0;  /* 명상 (아로마 호흡명상 · 싱잉볼 이완명상) */
+    --cell-white: #ffffff;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -97,6 +98,7 @@
   .c-paleblue { background: var(--cell-paleblue); }
   .c-green { background: var(--cell-green); }
   .c-lavender { background: var(--cell-lavender); }
+  .c-orange { background: var(--cell-orange); }
   .c-white { background: var(--cell-white); box-shadow: inset 0 0 0 1px #e8e4d8; }
   .recruit {
     color: #e02f2f; font-size: 18px; font-weight: 700; line-height: 1.5;
@@ -260,8 +262,8 @@
     <div class="cell c-green">프리메드<br/>테라피</div>
     <div class="cell c-blue">하타</div>
     <div class="cell c-yellow">인요가</div>
-    <div class="cell c-cream">아로마<br/>호흡명상</div>
-    <div class="cell c-white">빈야사</div>
+    <div class="cell c-orange">아로마<br/>호흡명상</div>
+    <div class="cell c-lavender">빈야사</div>
     <div class="cell"><div class="recruit">수업 모집중<br/>오픈예정</div></div>
 
     <!-- 일요일 스페셜 -->
@@ -278,12 +280,12 @@
 
     <!-- 12:00 -->
     <div class="tcell">12:00</div>
-    <div class="cell c-paleblue">싱잉볼<br/>이완명상</div>
-    <div class="cell c-white">빈야사</div>
+    <div class="cell c-orange">싱잉볼<br/>이완명상</div>
+    <div class="cell c-lavender">빈야사</div>
     <div class="cell c-green">근막테라피</div>
     <div class="cell c-lavender">아쉬탕가<br/>LV1</div>
     <div class="cell c-blue">하타요가</div>
-    <div class="cell c-paleblue">싱잉볼<br/>이완명상</div>
+    <div class="cell c-orange">싱잉볼<br/>이완명상</div>
 
     <!-- 14:00-17:00 -->
     <div class="tcell">14:00<span class="bar">|</span>17:00</div>
@@ -297,19 +299,19 @@
     <div class="cell c-green" style="grid-row:5; grid-column:2">프리메드<br/>테라피</div>
     <div class="teacher-span t-orange" style="grid-row:5/7; grid-column:3">
       <div class="cell c-lavender">아쉬탕가<br/>LV1</div>
-      <div class="cell c-white">빈야사</div>
+      <div class="cell c-lavender">빈야사</div>
     </div>
     <div class="cell c-blue t-green-cell" style="grid-row:5; grid-column:4">하타</div>
     <div class="teacher-span t-orange" style="grid-row:5/7; grid-column:5">
-      <div class="cell c-cream">아로마<br/>호흡명상</div>
+      <div class="cell c-orange">아로마<br/>호흡명상</div>
       <div class="cell c-lavender">아쉬탕가<br/>LV1</div>
     </div>
-    <div class="cell c-white t-green-cell" style="grid-row:5; grid-column:6">빈야사</div>
+    <div class="cell c-lavender t-green-cell" style="grid-row:5; grid-column:6">빈야사</div>
     <div class="corp-box">기업강의 및<br/>스페셜 클래스</div>
 
     <!-- 20:00 -->
     <div class="tcell" style="grid-row:6">20:00</div>
-    <div class="cell c-paleblue" style="grid-row:6; grid-column:2">싱잉볼<br/>이완명상</div>
+    <div class="cell c-orange" style="grid-row:6; grid-column:2">싱잉볼<br/>이완명상</div>
     <div class="cell c-green" style="grid-row:6; grid-column:4">프리메드<br/>테라피</div>
     <div class="cell c-yellow" style="grid-row:6; grid-column:6">인요가</div>
   </div>
