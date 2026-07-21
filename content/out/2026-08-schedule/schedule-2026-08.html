@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>요가명상·세련 — 2026년 8월 CLASS SCHEDULE</title>
+<!-- 웹에서 열 때 서체 로드 (렌더 환경에서는 시스템 설치 폰트 사용) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&display=swap" />
+<style>
+  :root {
+    --green-deep: #23402b;   /* 헤드라인 딥 그린 */
+    --green-head: #3d5a3e;   /* 테이블 헤더 */
+    --green-line: #4a7050;   /* 시소선생님 테두리 */
+    --orange-line: #e2703a;  /* 나영선생님 테두리 */
+    --ink: #2b2b2b;
+    --cell-yellow: #fdf3d7;  /* 인요가 */
+    --cell-cream: #fdf8ea;   /* 아로마 호흡명상 */
+    --cell-blue: #e3eef7;    /* 하타 계열 */
+    --cell-paleblue: #f1f7fa;/* 싱잉볼 이완명상 */
+    --cell-green: #e9f1de;   /* 테라피 계열 */
+    --cell-lavender: #ecebf7;/* 아쉬탕가 */
+    --cell-white: #ffffff;   /* 빈야사 */
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #efeae2;
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    color: var(--ink);
+    display: flex; justify-content: center; padding: 24px 0;
+  }
+  .poster {
+    position: relative;
+    width: 1050px;
+    background: #fff;
+    padding: 34px 30px 30px;
+    overflow: hidden;
+  }
+  .serif { font-family: 'Noto Serif KR', serif; }
+
+  /* ── 헤더 ─────────────────────────────── */
+  .brand-row {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    color: var(--green-deep); font-size: 21px; font-weight: 600; letter-spacing: 8px;
+  }
+  .brand-row svg { flex: none; }
+  h1 {
+    margin-top: 2px;
+    text-align: center;
+    font-size: 82px; font-weight: 600; letter-spacing: 6px;
+    color: var(--green-deep); line-height: 1.12;
+  }
+  .subtitle {
+    display: flex; align-items: center; justify-content: center; gap: 18px;
+    margin-top: 2px; font-size: 27px; font-weight: 500; color: #1d1d1d;
+  }
+  .subtitle::before, .subtitle::after {
+    content: ''; width: 110px; height: 2px; background: #333;
+  }
+  .month-badge {
+    width: fit-content; margin: 14px auto 0;
+    border: 1.5px solid var(--green-line); border-radius: 999px;
+    padding: 5px 22px; font-size: 17px; font-weight: 600; letter-spacing: 2px;
+    color: var(--green-deep); background: #fcfbf6;
+  }
+  .deco-branch { position: absolute; top: 10px; right: 14px; }
+
+  /* ── 시간표 그리드 ─────────────────────── */
+  .grid {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: 96px repeat(7, 1fr);
+    grid-template-rows: 62px 112px 112px 148px 116px 116px;
+    gap: 6px;
+  }
+  .hcell {
+    background: var(--green-head); color: #fff; border-radius: 3px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    line-height: 1.15;
+  }
+  .hcell .ko { font-size: 23px; font-weight: 600; }
+  .hcell .en { font-size: 14px; opacity: .85; letter-spacing: 1px; }
+  .hcell.time-h { font-size: 19px; letter-spacing: 2px; font-weight: 500; }
+  .tcell {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-size: 27px; font-weight: 500; color: #1c1c1c; line-height: 1.2;
+  }
+  .tcell .bar { font-size: 20px; line-height: 1; }
+  .cell {
+    border-radius: 4px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; font-size: 20.5px; font-weight: 600; color: #333; line-height: 1.35;
+  }
+  .c-yellow { background: var(--cell-yellow); }
+  .c-cream { background: var(--cell-cream); }
+  .c-blue { background: var(--cell-blue); }
+  .c-paleblue { background: var(--cell-paleblue); }
+  .c-green { background: var(--cell-green); }
+  .c-lavender { background: var(--cell-lavender); }
+  .c-white { background: var(--cell-white); box-shadow: inset 0 0 0 1px #e8e4d8; }
+  .recruit {
+    color: #e02f2f; font-size: 18px; font-weight: 700; line-height: 1.5;
+  }
+  .lesson-band {
+    grid-column: 2 / 8; grid-row: 4;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    font-size: 30px; font-weight: 700; color: #1d1d1d; letter-spacing: 1px;
+  }
+  /* 일요일 스페셜 명상 */
+  .sunday-box {
+    grid-column: 8; grid-row: 2 / 5;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+    padding: 4px 2px;
+  }
+  .special-pill {
+    background: var(--cell-cream); border-radius: 999px;
+    padding: 9px 16px; font-size: 17.5px; font-weight: 700; color: #333;
+    box-shadow: inset 0 0 0 1px #ece5d2;
+    white-space: nowrap;
+  }
+  .sunday-list {
+    border: 1.5px solid var(--green-line); border-radius: 14px;
+    padding: 14px 10px 10px; width: 100%;
+    display: flex; flex-direction: column; align-items: center; gap: 11px;
+    font-size: 16.5px; font-weight: 600; color: #333; background: #fff;
+  }
+  /* 강사 테두리 박스 (저녁 2타임 묶음) */
+  .teacher-span {
+    display: flex; flex-direction: column; gap: 6px;
+    border-radius: 10px; padding: 5px;
+  }
+  .t-orange { box-shadow: inset 0 0 0 2px var(--orange-line); }
+  .t-green-cell { box-shadow: inset 0 0 0 2px var(--green-line); }
+  .teacher-span .cell { flex: 1; border-radius: 6px; }
+  .corp-box {
+    grid-column: 7 / 9; grid-row: 5 / 7;
+    background: var(--cell-cream); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-size: 26px; font-weight: 700; color: #2b2b2b; line-height: 1.6;
+  }
+  /* 강사 범례 */
+  .legend-row {
+    display: flex; justify-content: center; gap: 60px; margin-top: 14px;
+  }
+  .legend {
+    width: 250px; text-align: center; background: #fff;
+    padding: 9px 0; font-size: 21px; font-weight: 600; letter-spacing: 6px;
+  }
+  .legend.nayoung { border: 2px solid var(--orange-line); color: #1d1d1d; }
+  .legend.siso { border: 2px solid var(--green-line); color: #1d1d1d; }
+
+  /* ── 레벨 가이드 ───────────────────────── */
+  .section-title {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    margin-top: 30px; font-size: 27px; font-weight: 700; letter-spacing: 5px; color: #1d1d1d;
+  }
+  .levels {
+    margin-top: 16px;
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 13px;
+  }
+  .levels > div { display: flex; flex-direction: column; }
+  .level-pill {
+    border-radius: 6px; color: #fff; text-align: center;
+    font-size: 18px; font-weight: 700; padding: 8px 0; letter-spacing: 1px;
+  }
+  .lv1 { background: #f0c419; }
+  .lv2 { background: #e8552f; }
+  .lv3 { background: #5e8f35; }
+  .lv4 { background: #2e7cd6; }
+  .lv5 { background: #6b3fa0; }
+  .level-card {
+    margin-top: 9px; background: #fff; border: 1px solid #e8e4dc; border-radius: 8px;
+    padding: 13px 12px; font-size: 13.5px; line-height: 1.62; color: #444;
+    display: flex; flex-direction: column; gap: 12px; flex: 1;
+  }
+  .level-card p:first-child { font-weight: 700; color: #222; }
+
+  /* ── SPECIAL 특화 프로그램 ─────────────── */
+  .special-wrap { position: relative; margin-top: 38px; }
+  .special-band {
+    background: #fdf1ec; border: 1px solid #f6dccf; border-radius: 12px;
+    padding: 34px 24px 22px;
+    display: grid; grid-template-columns: 1.15fr 1.35fr 1fr; gap: 22px; align-items: center;
+  }
+  .special-title {
+    position: absolute; top: -17px; left: 50%; transform: translateX(-50%);
+    background: #f0446b; color: #fff; border-radius: 999px;
+    padding: 8px 30px; font-size: 19px; font-weight: 800; letter-spacing: 2px;
+    white-space: nowrap;
+  }
+  .sp-item { display: flex; gap: 14px; align-items: flex-start; }
+  .sp-item svg { flex: none; margin-top: 4px; }
+  .sp-item h3 { font-size: 19px; font-weight: 800; color: #222; margin-bottom: 6px; }
+  .sp-item.preg h3 { color: #d63a4a; }
+  .sp-item p { font-size: 13.5px; line-height: 1.6; color: #444; }
+  .sp-red { color: #e02f2f; font-weight: 700; margin-top: 5px; }
+  .sp-note {
+    background: #fff; border: 1px solid #eee0d6; border-radius: 10px;
+    padding: 18px 18px; font-size: 16.5px; font-weight: 700; line-height: 1.7; color: #222;
+  }
+
+  /* ── 푸터 안내 ────────────────────────── */
+  .footer {
+    margin-top: 26px;
+    display: grid; grid-template-columns: 1fr 1fr 1.7fr; align-items: center;
+  }
+  .f-item {
+    display: flex; align-items: center; gap: 16px; padding: 0 18px;
+    font-size: 15px; line-height: 1.65; color: #222; font-weight: 500;
+  }
+  .f-item + .f-item { border-left: 1.5px solid #ddd; }
+  .f-item svg { flex: none; }
+</style>
+</head>
+<body>
+<div class="poster">
+
+  <!-- 우상단 장식 가지 -->
+  <svg class="deco-branch" width="150" height="150" viewBox="0 0 150 150" fill="none">
+    <path d="M145 5 C 120 40, 95 75, 70 120" stroke="#8a9a5b" stroke-width="2.5" fill="none"/>
+    <g fill="#dfd98a" stroke="#b9b35f" stroke-width="1">
+      <ellipse cx="128" cy="28" rx="9" ry="19" transform="rotate(35 128 28)"/>
+      <ellipse cx="105" cy="55" rx="8" ry="17" transform="rotate(45 105 55)"/>
+      <ellipse cx="86" cy="86" rx="8" ry="16" transform="rotate(50 86 86)"/>
+      <ellipse cx="140" cy="55" rx="7" ry="15" transform="rotate(120 140 55)"/>
+      <ellipse cx="120" cy="85" rx="7" ry="14" transform="rotate(125 120 85)"/>
+    </g>
+  </svg>
+
+  <!-- 헤더 -->
+  <div class="brand-row serif">
+    <svg width="26" height="18" viewBox="0 0 26 18" fill="#7a8f4f"><path d="M1 16 Q 8 2 25 1 Q 16 14 1 16 Z"/></svg>
+    요가명상 · 세련
+    <svg width="26" height="18" viewBox="0 0 26 18" fill="#7a8f4f"><path d="M25 16 Q 18 2 1 1 Q 10 14 25 16 Z"/></svg>
+  </div>
+  <h1 class="serif">CLASS SCHEDULE</h1>
+  <div class="subtitle">A Space To Restore</div>
+  <div class="month-badge serif">2026 AUGUST · 8월 시간표</div>
+
+  <!-- 시간표 -->
+  <div class="grid">
+    <div class="hcell time-h">TIME</div>
+    <div class="hcell"><span class="ko">월</span><span class="en">MON</span></div>
+    <div class="hcell"><span class="ko">화</span><span class="en">TUE</span></div>
+    <div class="hcell"><span class="ko">수</span><span class="en">WED</span></div>
+    <div class="hcell"><span class="ko">목</span><span class="en">THU</span></div>
+    <div class="hcell"><span class="ko">금</span><span class="en">FRI</span></div>
+    <div class="hcell"><span class="ko">토</span><span class="en">SAT</span></div>
+    <div class="hcell"><span class="ko">일</span><span class="en">SUN</span></div>
+
+    <!-- 07:30 -->
+    <div class="tcell">07:30</div>
+    <div class="cell c-green">프리메드<br/>테라피</div>
+    <div class="cell c-blue">하타</div>
+    <div class="cell c-yellow">인요가</div>
+    <div class="cell c-cream">아로마<br/>호흡명상</div>
+    <div class="cell c-white">빈야사</div>
+    <div class="cell"><div class="recruit">수업 모집중<br/>오픈예정</div></div>
+
+    <!-- 일요일 스페셜 -->
+    <div class="sunday-box">
+      <div class="special-pill">스페셜 명상</div>
+      <div class="sunday-list">
+        <span>추후 공지</span>
+        <span>야외명상</span>
+        <span>테마명상</span>
+        <span>원데이 클래스</span>
+        <svg width="22" height="15" viewBox="0 0 26 18" fill="#7a8f4f"><path d="M1 16 Q 8 2 25 1 Q 16 14 1 16 Z"/></svg>
+      </div>
+    </div>
+
+    <!-- 12:00 -->
+    <div class="tcell">12:00</div>
+    <div class="cell c-paleblue">싱잉볼<br/>이완명상</div>
+    <div class="cell c-white">빈야사</div>
+    <div class="cell c-green">근막테라피</div>
+    <div class="cell c-lavender">아쉬탕가<br/>LV1</div>
+    <div class="cell c-blue">하타요가</div>
+    <div class="cell c-paleblue">싱잉볼<br/>이완명상</div>
+
+    <!-- 14:00-17:00 -->
+    <div class="tcell">14:00<span class="bar">|</span>17:00</div>
+    <div class="lesson-band">
+      <span>개인레슨, 특화프로그램 , 강사반수업</span>
+      <svg width="30" height="20" viewBox="0 0 26 18" fill="#7a8f4f"><path d="M1 16 Q 8 2 25 1 Q 16 14 1 16 Z"/></svg>
+    </div>
+
+    <!-- 18:30 -->
+    <div class="tcell" style="grid-row:5">18:30</div>
+    <div class="cell c-green" style="grid-row:5; grid-column:2">프리메드<br/>테라피</div>
+    <div class="teacher-span t-orange" style="grid-row:5/7; grid-column:3">
+      <div class="cell c-lavender">아쉬탕가<br/>LV1</div>
+      <div class="cell c-white">빈야사</div>
+    </div>
+    <div class="cell c-blue t-green-cell" style="grid-row:5; grid-column:4">하타</div>
+    <div class="teacher-span t-orange" style="grid-row:5/7; grid-column:5">
+      <div class="cell c-cream">아로마<br/>호흡명상</div>
+      <div class="cell c-lavender">아쉬탕가<br/>LV1</div>
+    </div>
+    <div class="cell c-white t-green-cell" style="grid-row:5; grid-column:6">빈야사</div>
+    <div class="corp-box">기업강의 및<br/>스페셜 클래스</div>
+
+    <!-- 20:00 -->
+    <div class="tcell" style="grid-row:6">20:00</div>
+    <div class="cell c-paleblue" style="grid-row:6; grid-column:2">싱잉볼<br/>이완명상</div>
+    <div class="cell c-green" style="grid-row:6; grid-column:4">프리메드<br/>테라피</div>
+    <div class="cell c-yellow" style="grid-row:6; grid-column:6">인요가</div>
+  </div>
+
+  <!-- 강사 범례 -->
+  <div class="legend-row">
+    <div class="legend nayoung serif">나영선생님</div>
+    <div class="legend siso serif">시소선생님</div>
+  </div>
+
+  <!-- 레벨 가이드 -->
+  <div class="section-title serif">
+    <svg width="26" height="18" viewBox="0 0 26 18" fill="#7a8f4f"><path d="M1 16 Q 8 2 25 1 Q 16 14 1 16 Z"/></svg>
+    LEVEL GUIDE
+    <svg width="26" height="18" viewBox="0 0 26 18" fill="#7a8f4f"><path d="M25 16 Q 18 2 1 1 Q 10 14 25 16 Z"/></svg>
+  </div>
+  <div class="levels">
+    <div>
+      <div class="level-pill lv1">LV.1 입문</div>
+      <div class="level-card">
+        <p>신체에 깊은 이완을 주는 편안한 요가</p>
+        <p>몸의 긴장을 천천히 풀어주고, 자율신경을 안정시켜 마음의 평화와 휴식을 돕습니다.</p>
+        <p>유연성 향상과 스트레스 완화, 숙면에 도움이 되는 수업입니다.</p>
+      </div>
+    </div>
+    <div>
+      <div class="level-pill lv2">LV.2 이완· 명상</div>
+      <div class="level-card">
+        <p>남녀노소 즐길 수 있는 편안한 요가와 다양한 명상</p>
+        <p>호흡과 향, 소리를 이용해 몸과 마음의 이완과 집중력을 높여 일상의 스트레스를 해소합니다.</p>
+        <p>명상 경험이 적은 분들도 쉽게 참여할 수 있습니다.</p>
+      </div>
+    </div>
+    <div>
+      <div class="level-pill lv3">LV.3 테라피</div>
+      <div class="level-card">
+        <p>허리, 목, 어깨 등 근골격계 질환을 완화하는 근막이완 테라피</p>
+        <p>해부학적 원리를 기반으로 근막의 긴장을 완화하고 바른 정렬을 회복하도록 돕습니다.</p>
+        <p>통증 완화와 기능 개선, 회복이 필요한 분들께 추천합니다.</p>
+      </div>
+    </div>
+    <div>
+      <div class="level-pill lv4">LV.4 기본 수련</div>
+      <div class="level-card">
+        <p>찬드라나마스카라를 기반으로 불균형을 인지하고 개선해나갈 수 있는 기본 호흡의 전통 요가</p>
+        <p>기초 체력과 유연성 향상, 자세 교정, 호흡과 움직임의 연결을 통해 몸과 마음의 균형을 잡아줍니다.</p>
+        <p>꾸준한 수련으로 건강한 변화와 자신감을 경험할 수 있습니다.</p>
+      </div>
+    </div>
+    <div>
+      <div class="level-pill lv5">LV.5 심화 수련</div>
+      <div class="level-card">
+        <p>수리야나마스카라를 기반으로 근력을 사용하여 체형 균형을 돕는 전통 요가</p>
+        <p>역동적인 호흡과 호흡의 연결로 심화된 근력과 유연성, 집중력을 길러갑니다.</p>
+        <p>자기 성찰과 수련의 깊이를 원하는 분들께 추천합니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPECIAL 특화 프로그램 -->
+  <div class="special-wrap">
+    <div class="special-title">SPECIAL 특화 프로그램</div>
+    <div class="special-band">
+      <div class="sp-item preg">
+        <svg width="52" height="64" viewBox="0 0 52 64" fill="none" stroke="#d63a4a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="27" cy="10" r="6.5"/>
+          <path d="M25 19 C 18 21, 16 28, 17 34 C 12 36, 12 44, 18 45 L 21 45 C 21 52, 22 58, 23 62"/>
+          <path d="M30 19 C 34 22, 35 27, 34 31 C 39 34, 39 42, 33 44 C 32 51, 32 57, 31 62"/>
+          <path d="M17 34 C 22 38, 28 38, 34 31" opacity="0"/>
+          <ellipse cx="26" cy="38" rx="9" ry="8" stroke-dasharray="0" opacity=".9"/>
+        </svg>
+        <div>
+          <h3>임산부요가</h3>
+          <p>임신 안정기(15~25주)의 산모를 위한 골반 교정 및 유연성 향상 요가.
+             몸과 마음의 안정을 돕고 건강한 출산을 준비하며, 아기와 교감하는 행복한 시간을 만들어 갑니다.</p>
+        </div>
+      </div>
+      <div class="sp-item">
+        <svg width="54" height="54" viewBox="0 0 54 54" fill="none">
+          <path d="M27 16 C 23 8, 10 9, 10 19 C 10 27, 22 33, 27 37 C 32 33, 44 27, 44 19 C 44 9, 31 8, 27 16 Z" fill="#e0304d"/>
+          <path d="M6 40 C 12 34, 20 36, 24 40 M 48 40 C 42 34, 34 36, 30 40" stroke="#e8a13c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M4 44 C 12 40, 22 42, 27 47 C 32 42, 42 40, 50 44" stroke="#e8a13c" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <h3>암케어 테라피</h3>
+          <p>암 전문 요양병원에서의 경험을 토대로 진행되는<br/>몸과 마음의 회복을 돕는 치유 중심 테라피 클래스입니다.</p>
+          <p class="sp-red">면역 회복 · 림프 순환 · 스트레스 완화 · 심신 안정</p>
+        </div>
+      </div>
+      <div class="sp-note">
+        암 전문 요양병원에서<br/>다년간의 임상 경험을 가진<br/>강사가 직접 지도합니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- 하단 안내 -->
+  <div class="footer">
+    <div class="f-item">
+      <svg width="46" height="46" viewBox="0 0 46 46" fill="none" stroke="#222" stroke-width="2.2">
+        <rect x="4" y="8" width="38" height="34" rx="4"/>
+        <path d="M4 17 H 42 M 13 4 V 11 M 33 4 V 11"/>
+        <g fill="#222" stroke="none">
+          <circle cx="13" cy="24" r="1.8"/><circle cx="20" cy="24" r="1.8"/><circle cx="27" cy="24" r="1.8"/><circle cx="34" cy="24" r="1.8"/>
+          <circle cx="13" cy="31" r="1.8"/><circle cx="20" cy="31" r="1.8"/><circle cx="27" cy="31" r="1.8"/><circle cx="34" cy="31" r="1.8"/>
+        </g>
+      </svg>
+      <span>강의실 입장은<br/>20분 전부터<br/>가능합니다.</span>
+    </div>
+    <div class="f-item">
+      <svg width="46" height="46" viewBox="0 0 46 46" fill="none" stroke="#222" stroke-width="2.2">
+        <circle cx="23" cy="23" r="19"/>
+        <path d="M23 12 V 23 L 30 28" stroke-linecap="round"/>
+      </svg>
+      <span>강의는<br/>60분간<br/>진행됩니다.</span>
+    </div>
+    <div class="f-item">
+      <svg width="46" height="46" viewBox="0 0 46 46" fill="none" stroke="#222" stroke-width="2">
+        <circle cx="23" cy="9" r="5"/>
+        <path d="M23 14 C 17 16, 14 21, 14 26 L 10 32 M 23 14 C 29 16, 32 21, 32 26 L 36 32 M 14 26 C 14 31, 18 34, 23 34 C 28 34, 32 31, 32 26 M 12 38 H 34" stroke-linecap="round"/>
+      </svg>
+      <span>임산부, 간질(뇌전증), 심혈관질환, 정신과적 치료 중인 분은
+            참여 전 반드시 담당 강사에게 알려주시기 바랍니다.
+            개인의 건강 상태에 따라 일부 프로그램 참여가 제한될 수 있습니다.</span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
