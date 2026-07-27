@@ -31,13 +31,13 @@ export const SCHEDULE: readonly ScheduleEntry[] = [
   { day: '화', time: '18:30', name: '아쉬탕가 LV1', level: 5, teacher: '나영' },
   { day: '수', time: '18:30', name: '하타', level: 4, teacher: '시소' },
   { day: '목', time: '18:30', name: '아로마 호흡명상', level: 2, teacher: '나영' },
-  { day: '금', time: '18:30', name: '빈야사', level: 5, teacher: '시소' },
+  { day: '금', time: '18:30', name: '크라마플로우 LV1', level: 5, teacher: '시소' },
 
   { day: '월', time: '20:00', name: '싱잉볼 이완명상', level: 2 },
   { day: '화', time: '20:00', name: '빈야사', level: 5, teacher: '나영' },
   { day: '수', time: '20:00', name: '프리메드 테라피', level: 3 },
   { day: '목', time: '20:00', name: '아쉬탕가 LV1', level: 5, teacher: '나영' },
-  { day: '금', time: '20:00', name: '인요가', level: 1 },
+  { day: '금', time: '20:00', name: '인요가', level: 1, teacher: '시소' },
 ]
 
 const DAY_BY_JS_INDEX: Record<number, Day | undefined> = {
