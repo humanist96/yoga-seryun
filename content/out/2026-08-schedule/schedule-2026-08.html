@@ -221,6 +221,42 @@
     body { background: #fff; padding: 0; }
     .poster { margin: 0 auto; }
   }
+
+  /* ── A4 전용 컴팩트 레이아웃 ─────────────
+     .poster에 a4 클래스를 붙이면 세로 간격이 조여져
+     가로 1050px 기준 높이가 A4 비율(≈1485px)에 맞는다.
+     PDF 렌더 스크립트가 이 클래스를 사용한다. */
+  .poster.a4 { padding: 26px 30px 22px; }
+  .poster.a4 .brand-row { font-size: 18px; letter-spacing: 6px; }
+  .poster.a4 h1 { font-size: 64px; letter-spacing: 5px; }
+  .poster.a4 .subtitle { font-size: 22px; }
+  .poster.a4 .subtitle::before, .poster.a4 .subtitle::after { width: 90px; }
+  .poster.a4 .month-badge { margin-top: 8px; font-size: 15px; padding: 4px 18px; }
+  .poster.a4 .deco-branch { width: 120px; height: 120px; }
+  .poster.a4 .grid { margin-top: 14px; grid-template-rows: 52px 98px 98px 116px 102px 102px; gap: 5px; }
+  .poster.a4 .hcell .ko { font-size: 21px; }
+  .poster.a4 .hcell .en { font-size: 12px; }
+  .poster.a4 .tcell { font-size: 24px; }
+  .poster.a4 .cell { font-size: 19px; }
+  .poster.a4 .lesson-band { font-size: 27px; }
+  .poster.a4 .corp-box { font-size: 23px; }
+  .poster.a4 .sunday-list { gap: 8px; font-size: 15px; padding: 10px 8px 8px; }
+  .poster.a4 .special-pill { font-size: 16px; padding: 7px 14px; }
+  .poster.a4 .recruit { font-size: 16.5px; }
+  .poster.a4 .legend-row { margin-top: 10px; gap: 50px; }
+  .poster.a4 .legend { padding: 7px 0; font-size: 19px; width: 230px; }
+  .poster.a4 .section-title { margin-top: 18px; font-size: 24px; }
+  .poster.a4 .levels { margin-top: 12px; gap: 11px; }
+  .poster.a4 .level-pill { font-size: 16px; padding: 6px 0; }
+  .poster.a4 .level-card { padding: 10px; font-size: 12px; line-height: 1.5; gap: 9px; margin-top: 7px; }
+  .poster.a4 .special-wrap { margin-top: 24px; }
+  .poster.a4 .special-band { padding: 26px 20px 16px; gap: 18px; }
+  .poster.a4 .special-title { font-size: 17px; padding: 7px 26px; top: -15px; }
+  .poster.a4 .sp-item h3 { font-size: 17px; }
+  .poster.a4 .sp-item p { font-size: 12.5px; }
+  .poster.a4 .sp-note { font-size: 14.5px; padding: 14px; }
+  .poster.a4 .footer { margin-top: 14px; }
+  .poster.a4 .f-item { font-size: 13px; }
 </style>
 </head>
 <body>
