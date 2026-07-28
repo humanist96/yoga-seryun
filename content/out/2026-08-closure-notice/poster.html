@@ -8,7 +8,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 1240px; height: 1754px; }
   body {
-    font-family: "Gowun Batang", "NanumMyeongjo", serif;
+    font-family: "NanumMyeongjo", "Gowun Batang", serif;
     background: #f6f3ec;
     position: relative;
     overflow: hidden;
@@ -41,7 +41,8 @@
   }
   h1 {
     margin-top: 20px;
-    font-size: 128px; font-weight: 700; letter-spacing: 0.04em;
+    font-size: 128px; font-weight: 800; letter-spacing: 0.04em;
+    font-family: "NanumMyeongjoExtraBold", "NanumMyeongjo", serif;
     color: #3c4b3a;
   }
   .divider { margin-top: 30px; display: flex; align-items: center; }
@@ -89,43 +90,55 @@
 
   <svg width="0" height="0" style="position:absolute">
     <defs>
+      <filter id="wc" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="3" seed="7" result="n"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="7"/>
+      </filter>
       <linearGradient id="leafG" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#55604e"/>
-        <stop offset="1" stop-color="#8d9a85"/>
+        <stop offset="0" stop-color="#4c5846"/>
+        <stop offset="1" stop-color="#7d8a74"/>
+      </linearGradient>
+      <linearGradient id="leafG2" x1="0" y1="1" x2="1" y2="0">
+        <stop offset="0" stop-color="#5a6753"/>
+        <stop offset="1" stop-color="#8e9b84"/>
       </linearGradient>
       <linearGradient id="leafL" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#93a08a"/>
-        <stop offset="1" stop-color="#c2cbb6"/>
+        <stop offset="0" stop-color="#9aa78f"/>
+        <stop offset="1" stop-color="#cbd4bd"/>
       </linearGradient>
-      <g id="leaf">
-        <path d="M0,0 C26,-34 78,-46 118,-34 C112,6 70,34 30,30 C12,26 2,14 0,0 Z"/>
-        <path d="M4,-2 C40,-20 80,-30 112,-32" fill="none" stroke="#f4f1e8" stroke-width="2.5" opacity="0.6"/>
+      <g id="lf">
+        <path d="M0,0 C16,-22 58,-34 94,-26 C102,-24 104,-18 100,-13 C82,6 34,14 6,5 C1,3 -2,1 0,0 Z"/>
+        <path d="M3,-1 C34,-14 68,-22 97,-19" fill="none" stroke="#f4f1e8" stroke-width="2" opacity="0.5"/>
       </g>
-      <g id="branch">
-        <path d="M0,300 C40,190 90,90 210,0" fill="none" stroke="#5f6a56" stroke-width="4"/>
-        <use href="#leaf" fill="url(#leafG)" transform="translate(28,235) rotate(-118) scale(0.62)"/>
-        <use href="#leaf" fill="url(#leafL)" transform="translate(52,196) rotate(28) scale(0.55)"/>
-        <use href="#leaf" fill="url(#leafG)" transform="translate(76,152) rotate(-124) scale(0.70)"/>
-        <use href="#leaf" fill="url(#leafG)" transform="translate(102,118) rotate(22) scale(0.63)"/>
-        <use href="#leaf" fill="url(#leafL)" transform="translate(132,84) rotate(-130) scale(0.58)"/>
-        <use href="#leaf" fill="url(#leafG)" transform="translate(160,52) rotate(16) scale(0.68)"/>
-        <use href="#leaf" fill="url(#leafG)" transform="translate(186,24) rotate(-136) scale(0.5)"/>
-        <use href="#leaf" fill="url(#leafL)" transform="translate(206,4) rotate(8) scale(0.44)"/>
+      <g id="br">
+        <path d="M0,340 C30,220 70,100 190,0" fill="none" stroke="#57614e" stroke-width="4.5"/>
+        <use href="#lf" fill="url(#leafG)"  transform="translate(6,318)  rotate(-122) scale(0.72)"/>
+        <use href="#lf" fill="url(#leafG2)" transform="translate(16,290) rotate(38)   scale(0.66)"/>
+        <use href="#lf" fill="url(#leafG)"  transform="translate(28,258) rotate(-118) scale(0.78)"/>
+        <use href="#lf" fill="url(#leafL)"  transform="translate(42,226) rotate(34)   scale(0.62)"/>
+        <use href="#lf" fill="url(#leafG2)" transform="translate(57,194) rotate(-124) scale(0.74)"/>
+        <use href="#lf" fill="url(#leafG)"  transform="translate(74,163) rotate(28)   scale(0.70)"/>
+        <use href="#lf" fill="url(#leafL)"  transform="translate(93,132) rotate(-128) scale(0.60)"/>
+        <use href="#lf" fill="url(#leafG)"  transform="translate(113,103) rotate(24)  scale(0.66)"/>
+        <use href="#lf" fill="url(#leafG2)" transform="translate(135,76) rotate(-132) scale(0.58)"/>
+        <use href="#lf" fill="url(#leafL)"  transform="translate(157,51) rotate(18)   scale(0.52)"/>
+        <use href="#lf" fill="url(#leafG)"  transform="translate(176,29) rotate(-138) scale(0.46)"/>
+        <use href="#lf" fill="url(#leafG2)" transform="translate(192,11) rotate(10)   scale(0.40)"/>
       </g>
     </defs>
   </svg>
 
-  <svg class="leaves" style="left:40px; top:40px" width="320" height="366" viewBox="0 0 330 380">
-    <use href="#branch" transform="translate(298,26) rotate(118) scale(0.98)"/>
+  <svg class="leaves" filter="url(#wc)" style="left:32px; top:30px" width="300" height="370" viewBox="0 0 340 420">
+    <use href="#br" transform="translate(306,18) rotate(116) scale(0.82)"/>
   </svg>
-  <svg class="leaves" style="right:28px; top:56px" width="286" height="344" viewBox="0 0 300 360">
-    <use href="#branch" transform="translate(50,290) rotate(-14) scale(0.76) scale(-1,1) translate(-230,-300)"/>
+  <svg class="leaves" filter="url(#wc)" style="right:26px; top:40px" width="220" height="280" viewBox="0 0 300 390">
+    <use href="#br" transform="translate(40,330) rotate(-16) scale(0.78) scale(-1,1) translate(-200,-340)"/>
   </svg>
-  <svg class="leaves" style="right:30px; bottom:70px" width="300" height="414" viewBox="0 0 360 460">
-    <use href="#branch" transform="translate(265,385) rotate(174) scale(1.05)"/>
+  <svg class="leaves" filter="url(#wc)" style="right:28px; bottom:64px" width="320" height="470" viewBox="0 0 320 470">
+    <use href="#br" transform="translate(285,455) rotate(172) scale(1.1)"/>
   </svg>
-  <svg class="leaves" style="left:44px; bottom:44px" width="274" height="240" viewBox="0 0 300 260">
-    <use href="#branch" transform="translate(8,8) rotate(64) scale(0.62)"/>
+  <svg class="leaves" filter="url(#wc)" style="left:42px; bottom:42px" width="280" height="250" viewBox="0 0 280 250">
+    <use href="#br" transform="translate(6,6) rotate(62) scale(0.55)"/>
   </svg>
 
   <div class="content">
