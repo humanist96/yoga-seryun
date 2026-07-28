@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <title>요가명상, 세련 — 8월 휴관 안내</title>
 <style>
+  /* A4 비율 캔버스 1240×1754 (300dpi 렌더 시 2480×3508) */
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { width: 1080px; height: 1440px; }
+  html, body { width: 1240px; height: 1754px; }
   body {
     font-family: "Gowun Batang", "NanumMyeongjo", serif;
     background: #f6f3ec;
@@ -15,18 +16,18 @@
   }
   /* soft organic blobs */
   .blob { position: absolute; border-radius: 50%; z-index: 0; }
-  .blob-pink   { width: 360px; height: 360px; left: -60px; top: 190px; background: #f3e4dc; }
-  .blob-green1 { width: 420px; height: 470px; right: -140px; top: -120px; background: #e9ecdb; border-radius: 46% 54% 58% 42% / 52% 44% 56% 48%; }
-  .blob-green2 { width: 460px; height: 520px; right: -150px; bottom: 60px; background: #eaeddc; border-radius: 55% 45% 42% 58% / 48% 55% 45% 52%; }
-  .blob-green3 { width: 300px; height: 280px; left: -90px; bottom: -70px; background: #e9ecdb; border-radius: 48% 52% 55% 45% / 55% 48% 52% 45%; }
-  .ring { position: absolute; border: 1.5px solid #cfa88b; border-radius: 50%; z-index: 0; }
-  .ring1 { width: 380px; height: 380px; left: -150px; bottom: -110px; }
-  .ring2 { width: 300px; height: 300px; right: -110px; top: 330px; }
+  .blob-pink   { width: 410px; height: 410px; left: -70px; top: 230px; background: #f3e4dc; }
+  .blob-green1 { width: 480px; height: 540px; right: -160px; top: -140px; background: #e9ecdb; border-radius: 46% 54% 58% 42% / 52% 44% 56% 48%; }
+  .blob-green2 { width: 530px; height: 600px; right: -170px; bottom: 80px; background: #eaeddc; border-radius: 55% 45% 42% 58% / 48% 55% 45% 52%; }
+  .blob-green3 { width: 340px; height: 320px; left: -100px; bottom: -80px; background: #e9ecdb; border-radius: 48% 52% 55% 45% / 55% 48% 52% 45%; }
+  .ring { position: absolute; border: 2px solid #cfa88b; border-radius: 50%; z-index: 0; }
+  .ring1 { width: 430px; height: 430px; left: -170px; bottom: -130px; }
+  .ring2 { width: 340px; height: 340px; right: -125px; top: 400px; }
 
   /* thin frame */
   .frame {
-    position: absolute; inset: 30px; border: 1.5px solid #c8a184;
-    border-radius: 8px; z-index: 1;
+    position: absolute; inset: 34px; border: 2px solid #c8a184;
+    border-radius: 9px; z-index: 1;
   }
 
   .leaves { position: absolute; z-index: 2; }
@@ -34,47 +35,47 @@
   .content { position: relative; z-index: 3; height: 100%; display: flex; flex-direction: column; align-items: center; }
 
   .brand-top {
-    margin-top: 64px;
-    font-size: 37px; letter-spacing: 0.42em; text-indent: 0.42em;
+    margin-top: 150px;
+    font-size: 42px; letter-spacing: 0.42em; text-indent: 0.42em;
     color: #43503f;
   }
   h1 {
-    margin-top: 26px;
-    font-size: 100px; font-weight: 700; letter-spacing: 0.04em;
+    margin-top: 38px;
+    font-size: 136px; font-weight: 700; letter-spacing: 0.04em;
     color: #3c4b3a;
   }
-  .divider { margin-top: 22px; display: flex; align-items: center; }
-  .divider .line { width: 210px; height: 1.5px; background: #c8a184; }
-  .divider .dot { width: 11px; height: 11px; border-radius: 50%; background: #8a2f1f; margin: 0 4px; }
+  .divider { margin-top: 48px; display: flex; align-items: center; }
+  .divider .line { width: 240px; height: 2px; background: #c8a184; }
+  .divider .dot { width: 13px; height: 13px; border-radius: 50%; background: #8a2f1f; margin: 0 5px; }
 
   .table {
-    margin-top: 26px;
-    width: 640px;
-    border: 1.5px solid #d2ab8a;
-    border-radius: 26px;
+    margin-top: 54px;
+    width: 760px;
+    border: 2px solid #d2ab8a;
+    border-radius: 30px;
     background: rgba(252, 250, 244, 0.55);
-    padding: 14px 44px;
+    padding: 16px 52px;
   }
-  .row { display: flex; align-items: center; padding: 17px 0; }
-  .row + .row { border-top: 1.5px dashed #ddc09e; }
-  .row .date { flex: 0 0 300px; text-align: center; }
-  .row .date .d { font-size: 44px; color: #474d42; letter-spacing: 0.02em; }
-  .row .date .w { font-size: 27px; color: #6a6f63; margin-top: 6px; }
-  .row .sep { width: 1.5px; align-self: stretch; background: #d8b795; margin: -6px 0; }
+  .row { display: flex; align-items: center; padding: 32px 0; }
+  .row + .row { border-top: 2px dashed #ddc09e; }
+  .row .date { flex: 0 0 350px; text-align: center; }
+  .row .date .d { font-size: 55px; color: #474d42; letter-spacing: 0.02em; }
+  .row .date .w { font-size: 31px; color: #6a6f63; margin-top: 10px; }
+  .row .sep { width: 2px; align-self: stretch; background: #d8b795; margin: -7px 0; }
   .row .why {
     flex: 1; text-align: center;
-    font-size: 36px; color: #a5271b; line-height: 1.5;
+    font-size: 42px; color: #a5271b; line-height: 1.5;
   }
 
-  .notes { margin-top: 26px; text-align: center; font-size: 31px; color: #3e463c; line-height: 1.7; }
+  .notes { margin-top: 54px; text-align: center; font-size: 39px; color: #3e463c; line-height: 1.85; }
   .notes .em { color: #a5271b; font-weight: 700; }
-  .notes .thanks { margin-top: 12px; }
+  .notes .thanks { margin-top: 24px; }
 
-  .footer { margin-top: auto; margin-bottom: 54px; display: flex; flex-direction: column; align-items: center; }
-  .footer .divider { margin: 0 0 24px; }
-  .footer .divider .line { width: 250px; }
-  .footer .slogan { font-size: 27px; letter-spacing: 0.28em; text-indent: 0.28em; color: #43503f; }
-  .footer .brand { margin-top: 14px; font-size: 27px; letter-spacing: 0.18em; text-indent: 0.18em; color: #43503f; }
+  .footer { margin-top: auto; margin-bottom: 86px; display: flex; flex-direction: column; align-items: center; }
+  .footer .divider { margin: 0 0 30px; }
+  .footer .divider .line { width: 290px; }
+  .footer .slogan { font-size: 31px; letter-spacing: 0.28em; text-indent: 0.28em; color: #43503f; }
+  .footer .brand { margin-top: 18px; font-size: 31px; letter-spacing: 0.18em; text-indent: 0.18em; color: #43503f; }
 </style>
 </head>
 <body>
@@ -114,16 +115,16 @@
     </defs>
   </svg>
 
-  <svg class="leaves" style="left:34px; top:34px" width="280" height="320" viewBox="0 0 330 380">
-    <use href="#branch" transform="translate(298,26) rotate(118) scale(0.86)"/>
+  <svg class="leaves" style="left:40px; top:40px" width="320" height="366" viewBox="0 0 330 380">
+    <use href="#branch" transform="translate(298,26) rotate(118) scale(0.98)"/>
   </svg>
-  <svg class="leaves" style="right:24px; top:46px" width="250" height="300" viewBox="0 0 300 360">
+  <svg class="leaves" style="right:28px; top:56px" width="286" height="344" viewBox="0 0 300 360">
     <use href="#branch" transform="translate(50,290) rotate(-14) scale(0.76) scale(-1,1) translate(-230,-300)"/>
   </svg>
-  <svg class="leaves" style="right:36px; bottom:210px" width="290" height="400" viewBox="0 0 360 460">
+  <svg class="leaves" style="right:40px; bottom:260px" width="330" height="456" viewBox="0 0 360 460">
     <use href="#branch" transform="translate(265,385) rotate(174) scale(1.05)"/>
   </svg>
-  <svg class="leaves" style="left:38px; bottom:36px" width="240" height="210" viewBox="0 0 300 260">
+  <svg class="leaves" style="left:44px; bottom:44px" width="274" height="240" viewBox="0 0 300 260">
     <use href="#branch" transform="translate(8,8) rotate(64) scale(0.62)"/>
   </svg>
 
@@ -151,7 +152,7 @@
     </div>
 
     <div class="notes">
-      <div>휴관일 (<span class="em">3일</span>)만큼 회원권이 자동 연장됩니다.</div>
+      <div>휴관일 (3일)만큼 회원권이 자동 연장됩니다.</div>
       <div>휴관일을 제외한 수업은</div>
       <div>모두 정상적으로 진행됩니다.</div>
       <div class="thanks">감사합니다.</div>
