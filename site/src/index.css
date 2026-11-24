@@ -89,14 +89,14 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-/* 숨 쉬는 원 — 들숨 4초(0→40%) · 날숨 6초(40→100%), 순수 CSS 구동 */
+/* 숨 쉬는 원 — 들숨 4초(0→50%) · 날숨 4초(50→100%), 순수 CSS 구동 */
 .breath {
-  animation: breath 10s ease-in-out infinite;
+  animation: breath 8s ease-in-out infinite;
   will-change: transform;
 }
 
 .breath-ring {
-  animation: breath-ring 10s ease-in-out infinite;
+  animation: breath-ring 8s ease-in-out infinite;
   will-change: transform, opacity;
 }
 
@@ -104,7 +104,7 @@ body {
   0% {
     transform: scale(1);
   }
-  40% {
+  50% {
     transform: scale(1.12);
   }
   100% {
@@ -117,7 +117,7 @@ body {
     transform: scale(1.06);
     opacity: 0.4;
   }
-  40% {
+  50% {
     transform: scale(1);
     opacity: 0.8;
   }

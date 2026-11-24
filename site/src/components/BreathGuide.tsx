@@ -4,7 +4,7 @@ import { X } from 'lucide-react'
 import { LINKS } from '../data/content'
 import { useFocusTrap } from '../lib/focusTrap'
 
-const CYCLE_S = 10
+const CYCLE_S = 8
 const INHALE_S = 4
 const TOTAL_CYCLES = 3
 const TICK_MS = 200
@@ -23,7 +23,7 @@ const stateAt = (elapsedS: number): BreathState => {
 }
 
 /**
- * "함께 한 호흡" — 들숨 4초·날숨 6초 3회를 안내하는 전체 화면 가이드. (기획서 B3)
+ * "함께 한 호흡" — 들숨 4초·날숨 4초 3회를 안내하는 전체 화면 가이드. (기획서 B3)
  * 원의 호흡은 기존 .breath CSS keyframes와 동일 템포라 텍스트와 자연 동기화된다.
  */
 export default function BreathGuide({ onClose }: { onClose: () => void }) {

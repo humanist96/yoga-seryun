@@ -7,4 +7,4 @@ export const fadeUp = (delay = 0): MotionProps => ({
   transition: { duration: 0.6, delay, ease: 'easeOut' },
 })
 
-export const BREATH_DURATION_S = 10
+export const BREATH_DURATION_S = 8

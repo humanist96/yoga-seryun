@@ -24,7 +24,7 @@ const SUBTITLE_BY_MOOD: Record<Mood, string> = {
 }
 
 /**
- * 들숨 4초 · 날숨 6초 — 호흡 템포로 숨 쉬는 원, 안쪽에 위상차 링 하나.
+ * 들숨 4초 · 날숨 4초 — 호흡 템포로 숨 쉬는 원, 안쪽에 위상차 링 하나.
  * 순수 CSS keyframes 구동으로 '동작 줄이기' 기기에서도 항상 호흡한다.
  */
 function BreathingCircle() {
