@@ -6,8 +6,15 @@ import {
   DAYS,
   TIMES,
   SCHEDULE,
+  SCHEDULE_MONTH,
+  SPECIAL_CLASS,
+  CLOSURE,
+  entryKey,
   findNextClassInfo,
+  startTimeOf,
   todayKstDay,
+  todayKstIso,
+  weeksLabel,
   type Day,
   type ScheduleEntry,
 } from '../data/schedule'
@@ -28,33 +35,82 @@ const remainLabel = (minutes: number): string =>
 interface CellProps {
   day: Day
   time: (typeof TIMES)[number]
-  isNext: boolean
+  nextKey: string
   onSelect: (entry: ScheduleEntry) => void
 }
 
-function ClassCell({ day, time, isNext, onSelect }: CellProps) {
-  const entry = SCHEDULE.find((item) => item.day === day && item.time === time)
+const entryAriaLabel = (entry: ScheduleEntry): string => {
+  const weeks = weeksLabel(entry)
+  return `${entry.day}요일 ${startTimeOf(entry)} ${entry.name}${weeks ? ` (${weeks})` : ''} 수업 안내 보기`
+}
 
-  if (!entry) {
+function ClassCell({ day, time, nextKey, onSelect }: CellProps) {
+  const entries = SCHEDULE.filter((item) => item.day === day && item.time === time)
+
+  if (entries.length === 0) {
     return (
-      <div className="rounded-xl border border-dashed border-border/70 min-h-20 flex items-center justify-center">
+      <div className="rounded-xl border border-dashed border-border/70 min-h-20 h-full flex items-center justify-center">
         <span className="text-xs text-muted-foreground/60">수업 없음</span>
       </div>
     )
   }
 
+  // 격주 수업 — 한 칸에 두 수업을 위아래로 나눠 보여준다.
+  if (entries.length > 1) {
+    const hasNext = entries.some((entry) => entryKey(entry) === nextKey)
+    return (
+      <div
+        className={`rounded-xl bg-card min-h-20 h-full overflow-hidden flex flex-col divide-y divide-border/70 ${
+          hasNext ? 'ring-2 ring-accent' : ''
+        }`}
+      >
+        {entries.map((entry) => (
+          <button
+            key={entryKey(entry)}
+            type="button"
+            onClick={() => onSelect(entry)}
+            aria-label={entryAriaLabel(entry)}
+            className="group w-full flex-1 text-left px-3 py-2.5 transition-colors duration-300 hover:bg-accent-soft/40"
+          >
+            <div className="flex items-start justify-between gap-2">
+              <p className="text-sm font-medium leading-snug">{entry.name}</p>
+              <span className={`mt-1 w-2.5 h-2.5 rounded-full shrink-0 ${dotClassFor(entry.level)}`} />
+            </div>
+            <div className="mt-1 flex flex-wrap items-center justify-between gap-x-2 gap-y-0.5 text-xs text-muted-foreground">
+              <span className="tnum whitespace-nowrap">
+                <span className="font-medium text-accent-deep">{weeksLabel(entry)}</span> · Lv.{entry.level}
+              </span>
+              {entry.teacher && <span className="whitespace-nowrap">{entry.teacher} 선생님</span>}
+            </div>
+            {entryKey(entry) === nextKey && (
+              <p className="mt-1 text-[11px] font-medium text-accent-deep">다가오는 수업</p>
+            )}
+          </button>
+        ))}
+      </div>
+    )
+  }
+
+  const entry = entries[0]
+  const isNext = entryKey(entry) === nextKey
+
   return (
     <button
       type="button"
       onClick={() => onSelect(entry)}
-      aria-label={`${day}요일 ${time} ${entry.name} 수업 안내 보기`}
-      className={`group relative w-full text-left rounded-xl bg-card p-3 min-h-20 flex flex-col justify-between transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_-14px_rgba(188,92,116,0.4)] ${
+      aria-label={entryAriaLabel(entry)}
+      className={`group relative w-full h-full text-left rounded-xl bg-card p-3 min-h-20 flex flex-col justify-between transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_-14px_rgba(188,92,116,0.4)] ${
         isNext ? 'ring-2 ring-accent' : ''
       }`}
     >
-      <div className="flex items-start justify-between gap-2">
-        <p className="text-sm font-medium leading-snug">{entry.name}</p>
-        <span className={`mt-1 w-2.5 h-2.5 rounded-full shrink-0 ${dotClassFor(entry.level)}`} />
+      <div>
+        {entry.startTime && (
+          <p className="mb-1 text-[11px] font-medium text-accent-deep tnum">{entry.startTime} 시작</p>
+        )}
+        <div className="flex items-start justify-between gap-2">
+          <p className="text-sm font-medium leading-snug">{entry.name}</p>
+          <span className={`mt-1 w-2.5 h-2.5 rounded-full shrink-0 ${dotClassFor(entry.level)}`} />
+        </div>
       </div>
       <div className="flex items-center justify-between text-xs text-muted-foreground">
         <span className="tnum">Lv.{entry.level}</span>
@@ -75,12 +131,14 @@ function NextClassBanner({ onSelect }: { onSelect: (entry: ScheduleEntry) => voi
   if (!info) return null
 
   const { entry, dayOffset, minutesUntil } = info
+  const start = startTimeOf(entry)
+  const weeks = weeksLabel(entry)
   const when =
     dayOffset === 0
-      ? `오늘 ${entry.time}`
+      ? `오늘 ${start}`
       : dayOffset === 1
-        ? `내일 ${entry.time}`
-        : `${entry.day}요일 ${entry.time}`
+        ? `내일 ${start}`
+        : `${entry.day}요일 ${start}`
 
   return (
     <motion.div {...fadeUp(0.15)} className="mb-10 flex justify-center px-1">
@@ -92,6 +150,7 @@ function NextClassBanner({ onSelect }: { onSelect: (entry: ScheduleEntry) => voi
         <Sparkles className="w-4 h-4 text-accent shrink-0" aria-hidden="true" />
         <span className="text-foreground text-left">
           <span className="tnum font-medium">{when}</span> {entry.name}
+          {weeks && <span className="text-muted-foreground"> ({weeks})</span>}
           {entry.teacher && <span className="text-muted-foreground"> · {entry.teacher} 선생님</span>}
           {dayOffset === 0 && (
             <span className="text-accent-deep font-medium"> · {remainLabel(minutesUntil)} 시작</span>
@@ -144,7 +203,7 @@ function MobileSchedule({
               <ClassCell
                 day={selectedDay}
                 time={time}
-                isNext={nextKey === `${selectedDay}-${time}`}
+                nextKey={nextKey}
                 onSelect={onSelect}
               />
             </div>
@@ -175,11 +234,15 @@ function DesktopSchedule({
           <div key={time} className="contents">
             <p className="text-sm text-muted-foreground tnum pt-4">{time}</p>
             {DAYS.map((day, dayIndex) => (
-              <motion.div key={`${day}-${time}`} {...fadeUp(timeIndex * 0.12 + dayIndex * 0.04)}>
+              <motion.div
+                key={`${day}-${time}`}
+                {...fadeUp(timeIndex * 0.12 + dayIndex * 0.04)}
+                className="h-full"
+              >
                 <ClassCell
                   day={day}
                   time={time}
-                  isNext={nextKey === `${day}-${time}`}
+                  nextKey={nextKey}
                   onSelect={onSelect}
                 />
               </motion.div>
@@ -193,7 +256,11 @@ function DesktopSchedule({
 
 export default function Schedule() {
   const nextInfo = useNextClassInfo()
-  const nextKey = nextInfo ? `${nextInfo.entry.day}-${nextInfo.entry.time}` : ''
+  const nextKey = nextInfo ? entryKey(nextInfo.entry) : ''
+  const todayIso = todayKstIso(new Date())
+  const specialClass = SPECIAL_CLASS && todayIso <= SPECIAL_CLASS.date ? SPECIAL_CLASS : null
+  const closure =
+    CLOSURE && CLOSURE.dates.some((date) => todayIso <= date) ? CLOSURE : null
   const [activeEntry, setActiveEntry] = useState<ScheduleEntry | null>(null)
 
   return (
@@ -205,9 +272,12 @@ export default function Schedule() {
         >
           class schedule
         </motion.p>
-        <motion.h2 {...fadeUp(0.1)} className="mt-4 mb-8 font-serif text-3xl md:text-5xl text-center">
+        <motion.h2 {...fadeUp(0.1)} className="mt-4 font-serif text-3xl md:text-5xl text-center">
           이번 주의 수련
         </motion.h2>
+        <motion.p {...fadeUp(0.12)} className="mt-3 mb-8 text-center text-sm text-muted-foreground tnum">
+          {SCHEDULE_MONTH} 시간표
+        </motion.p>
 
         <NextClassBanner onSelect={setActiveEntry} />
 
@@ -220,7 +290,46 @@ export default function Schedule() {
           수업을 누르면 안내와 함께 바로 체험 예약으로 이어집니다.
         </motion.p>
 
-        <motion.div {...fadeUp(0.3)} className="mt-8 space-y-2 text-sm text-muted-foreground">
+        <motion.div {...fadeUp(0.3)} className="mt-8 space-y-3 text-sm text-muted-foreground">
+          {closure && (
+            <p className="rounded-2xl bg-accent-soft/60 px-5 py-3.5 text-center text-accent-deep break-keep">
+              <span className="font-medium">휴관 안내</span> — {closure.message}
+            </p>
+          )}
+          {specialClass && (
+            <div className="rounded-2xl bg-card p-5 text-left ring-1 ring-accent/30">
+              <p className="text-xs tracking-[2px] uppercase text-accent-deep">
+                special class · <span className="tnum">{specialClass.dateLabel}</span>
+              </p>
+              <p className="mt-2 font-medium text-foreground">스페셜 클래스</p>
+              <ul className="mt-3 space-y-1.5 text-foreground">
+                {specialClass.sessions.map((session) => (
+                  <li key={session.time} className="flex items-baseline gap-3">
+                    <span className="tnum w-12 shrink-0 font-medium">{session.time}</span>
+                    <span>{session.name}</span>
+                    <span className="tnum text-xs text-muted-foreground">{session.minutes}분</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-3 text-xs leading-relaxed">{specialClass.note}</p>
+              <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs">
+                {specialClass.prices.map((price) => (
+                  <span key={price.label}>
+                    <span className="font-medium text-foreground">{price.label}</span>{' '}
+                    <span className="tnum">{price.value}</span>
+                  </span>
+                ))}
+              </p>
+              <a
+                href={LINKS.naverTalk}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-3 inline-block text-xs font-medium text-accent-deep underline underline-offset-4"
+              >
+                톡톡으로 문의하기
+              </a>
+            </div>
+          )}
           <div className="grid sm:grid-cols-2 gap-3 text-left">
             <div className="rounded-2xl bg-card p-5">
               <p className="text-xs tracking-[2px] uppercase text-accent-deep">weekday 14–17</p>

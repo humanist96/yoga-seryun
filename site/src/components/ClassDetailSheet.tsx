@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { CalendarCheck, MessageCircle, X } from 'lucide-react'
-import type { ScheduleEntry } from '../data/schedule'
+import { startTimeOf, weeksLabel, type ScheduleEntry } from '../data/schedule'
 import { LEVELS, LINKS } from '../data/content'
 import { useFocusTrap } from '../lib/focusTrap'
 
@@ -19,6 +19,8 @@ export default function ClassDetailSheet({ entry, onClose }: ClassDetailSheetPro
   const containerRef = useRef<HTMLDivElement>(null)
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const level = LEVELS.find((item) => item.level === entry.level)
+  const start = startTimeOf(entry)
+  const weeks = weeksLabel(entry)
   useFocusTrap(containerRef)
 
   useEffect(() => {
@@ -46,7 +48,7 @@ export default function ClassDetailSheet({ entry, onClose }: ClassDetailSheetPro
       ref={containerRef}
       role="dialog"
       aria-modal="true"
-      aria-label={`${entry.day}요일 ${entry.time} ${entry.name} 수업 안내`}
+      aria-label={`${entry.day}요일 ${start} ${entry.name} 수업 안내`}
       className="fixed inset-0 z-50 flex items-end md:items-center justify-center"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -76,7 +78,8 @@ export default function ClassDetailSheet({ entry, onClose }: ClassDetailSheetPro
         </button>
 
         <p className="text-xs tracking-[2px] uppercase text-muted-foreground tnum">
-          {entry.day}요일 · {entry.time}
+          {entry.day}요일 · {start}
+          {weeks && <> · {weeks}</>}
         </p>
         <h3 className="mt-1.5 font-serif text-2xl">{entry.name}</h3>
 
@@ -98,7 +101,7 @@ export default function ClassDetailSheet({ entry, onClose }: ClassDetailSheetPro
         <div className="mt-5 rounded-2xl bg-card p-4 text-xs text-muted-foreground leading-relaxed">
           첫 체험은 네이버 예약으로 신청 후, 요청사항에{' '}
           <span className="text-foreground font-medium">
-            “{entry.day}요일 {entry.time} {entry.name} 희망”
+            “{entry.day}요일 {start} {entry.name} 희망”
           </span>
           이라고 남겨주시면 준비가 빨라져요. 예약비 1만원은 수업 참여 시 전액 환불됩니다.
         </div>
